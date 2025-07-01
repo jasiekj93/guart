@@ -6,6 +6,8 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+using namespace guart;
+
 Serial::Serial(std::string_view path)
 {
     handle = open(path.data(), O_RDWR);
@@ -77,16 +79,23 @@ Serial::~Serial()
     }
 }
 
-void Serial::write(char c)
+Output& Serial::operator<<(char c)
 {
     char value = c;
     ::write(handle, &value, sizeof(value));
-    tcdrain(handle);   //wait to be sent
+    // tcdrain(handle);   //wait to be sent
+    return *this;
 }
 
-void Serial::write(std::string_view data)
+Output& Serial::operator<<(const std::string_view data)
 {
     ::write(handle, data.data(), data.size());
+    // tcdrain(handle);   //wait to be sent
+    return *this;
+}
+
+void Serial::flush()
+{
     tcdrain(handle);   //wait to be sent
 }
 

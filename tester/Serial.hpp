@@ -11,14 +11,18 @@
 #include <string_view>
 #include <array>
 
-class Serial 
+#include <libguart/Output.hpp>
+
+class Serial : public guart::Output
 {
 public:
     Serial(std::string_view path);
     ~Serial();
 
-    void write(std::string_view);
-    void write(char);
+    Output& operator<<(const std::string_view) override;
+    Output& operator<<(char) override;
+
+    void flush() override;
 
     // std::span<const uint8_t> read();
 

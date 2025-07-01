@@ -1,20 +1,40 @@
 #pragma once
 
-#include <libguart/Point.hpp>
-#include <libguart/Dimensions.hpp>
+/**
+ * @file Window.hpp
+ * @author Adrian Szczepanski
+ * @date 01-07-2025
+ */
+
+#include <vector>
+#include <memory>
+#include <string>
+
+#include <libguart/Widget.hpp>
+#include <libguart/Parent.hpp>
 
 namespace guart
 {
-    class Window
+    class Window : public Parent, public Widget
     {
     public:
-        Window(const Point&, const Dimensions&, bool isBold = false);
+        Window(const Point&, const Dimensions&);
 
-        void draw() const;
+        void invalidate() const override;
+
+        void moveCursor(const Point& p) const override;
+        Output& getOutput() const override;
+
+        void resize(const Dimensions& d); 
+        inline void setLabel(std::string_view l) { label = l; }
+
+    protected:
+        void drawHeader() const;
+        void drawBody() const;
+        void drawFooter() const;
        
     private:
-        Point position;
         Dimensions dimensions;
-        bool isBold;
+        std::string label;
     };
 }

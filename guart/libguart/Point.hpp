@@ -15,5 +15,8 @@ namespace guart
 
         X x;
         Y y;
+
+        Point(X x, Y y)
+            : x(x), y(y) {}
     };
 }
