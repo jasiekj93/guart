@@ -19,8 +19,8 @@ int main(int argc, char* argv[])
     // Serial output("/dev/ttyUSB1");
 
     Screen screen(output);
-    auto window = std::make_shared<Window>(Point{10, 10}, Dimensions{20, 1});
-    auto window2 = std::make_shared<Window>(Point{0, 1}, Dimensions{30, 2});
+    auto window = std::make_shared<widget::Window>(Point{10, 10}, Dimensions{20, 1});
+    auto window2 = std::make_shared<widget::Window>(Point{0, 1}, Dimensions{30, 2});
     screen.addWidget(window2);
     screen.addWidget(window);
 
@@ -29,9 +29,9 @@ int main(int argc, char* argv[])
     // screen.invalidate();
     // window->moveTo(Point{40, 30});
     // window->resize(Dimensions{8, 6});
-    auto label = std::make_shared<Label>(Point{0, 0}, "Hello World!");
+    auto label = std::make_shared<widget::Label>(Point{0, 0}, "Hello World!");
     std::vector<std::string_view> buttons{ "Button1", "Button2" };
-    auto buttonBox = std::make_shared<ButtonBox>(Point{0, 2}, Dimensions{20, 3}, buttons);
+    auto buttonBox = std::make_shared<widget::ButtonBox>(Point{0, 2}, Dimensions{20, 3}, buttons);
     buttonBox->setActiveButton(0);
 
     window->addWidget(label);

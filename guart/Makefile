@@ -18,6 +18,8 @@ external_dir := $(project_dir)/external
 # Sources 
 cxx_sources :=  \
 $(wildcard libguart/*.cpp) \
+$(wildcard libguart/widget/*.cpp) \
+$(wildcard libguart/drawer/*.cpp) \
 
 # c_sources := \
 

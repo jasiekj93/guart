@@ -18,5 +18,10 @@ namespace guart
 
         Point(X x, Y y)
             : x(x), y(y) {}
+
+        Point operator+(const Point& other) const
+        {
+            return Point(x + other.x, y + other.y);
+        }
     };
 }

@@ -12,7 +12,7 @@
 #include <libguart/Widget.hpp>
 #include <libguart/Dimensions.hpp>
 
-namespace guart
+namespace guart::widget
 {
     class ButtonBox : public Widget
     {
@@ -22,11 +22,12 @@ namespace guart
         void addButton(const std::string_view& button);
         bool setActiveButton(int index);
 
-        void invalidate() const override;
+        inline auto& getDimensions() const { return dimensions; }
+        inline auto getActiveButton() const { return activeIndex; }
+        inline auto getButtons() const { return buttons; }
+        inline bool hasBorder() const { return addBorder; }
 
-    protected:
-        void drawBorder() const;
-        void drawButtons() const;
+        inline std::string_view getType() const override { return "ButtonBox"; }
 
     private:
         std::vector<std::string_view> buttons;
