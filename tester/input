@@ -1,0 +1,74 @@
+    // TerminalInput termInput;
+    
+    // if (!termInput.initialize())
+    // {
+    //     std::cerr << "Failed to initialize terminal input" << std::endl;
+    //     return 1;
+    // }
+    
+    // std::cout << "Terminal Input Demo - Press keys (ESC to exit):" << std::endl;
+    // std::cout << "- Regular keys will show their character and ASCII code" << std::endl;
+    // std::cout << "- Arrow keys and special keys will show their escape sequences" << std::endl;
+    // std::cout << "- Press ESC to exit" << std::endl << std::endl;
+    
+    // bool running = true;
+    // while (running)
+    // {
+    //     if (termInput.isInputAvailable())
+    //     {
+    //         std::string key = termInput.getSpecialKey();
+            
+    //         if (not key.empty())
+    //         {
+    //             if (key == "\x1b") // ESC key
+    //             {
+    //                 std::cout << "ESC pressed - exiting..." << std::endl;
+    //                 running = false;
+    //             }
+    //             else if (key.length() == 1)
+    //             {
+    //                 // Regular character
+    //                 char ch = key[0];
+    //                 std::cout << "Key: '" << ch << "' ASCII: " << static_cast<int>(static_cast<unsigned char>(ch)) 
+    //                           << " Hex: 0x" << std::hex << static_cast<int>(static_cast<unsigned char>(ch)) << std::dec << std::endl;
+                    
+    //                 if (ch == '\r' || ch == '\n')
+    //                 {
+    //                     std::cout << "Enter pressed" << std::endl;
+    //                 }
+    //             }
+    //             else
+    //             {
+    //                 // Escape sequence
+    //                 std::cout << "Special key sequence: ";
+    //                 for (char c : key)
+    //                 {
+    //                     std::cout << "\\x" << std::hex << std::setfill('0') << std::setw(2) 
+    //                               << static_cast<int>(static_cast<unsigned char>(c));
+    //                 }
+    //                 std::cout << std::dec << " (";
+                    
+    //                 // Identify common sequences
+    //                 if (key == "\x1b[A") std::cout << "UP ARROW";
+    //                 else if (key == "\x1b[B") std::cout << "DOWN ARROW";
+    //                 else if (key == "\x1b[C") std::cout << "RIGHT ARROW";
+    //                 else if (key == "\x1b[D") std::cout << "LEFT ARROW";
+    //                 else if (key == "\x1b[H") std::cout << "HOME";
+    //                 else if (key == "\x1b[F") std::cout << "END";
+    //                 else if (key == "\x1b[2~") std::cout << "INSERT";
+    //                 else if (key == "\x1b[3~") std::cout << "DELETE";
+    //                 else if (key == "\x1b[5~") std::cout << "PAGE UP";
+    //                 else if (key == "\x1b[6~") std::cout << "PAGE DOWN";
+    //                 else std::cout << "UNKNOWN";
+                    
+    //                 std::cout << ")" << std::endl;
+    //             }
+    //         }
+    //     }
+        
+    //     // Small delay to prevent busy waiting
+    //     usleep(10000); // 10ms
+    // }
+    
+    // termInput.restore();
+    // std::cout << "Terminal restored to normal mode" << std::endl;

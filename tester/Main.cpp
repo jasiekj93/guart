@@ -6,9 +6,7 @@
 
 #include <iostream>
 
-#include <libguart/Window.hpp>
-#include <libguart/Screen.hpp>
-#include <libguart/Label.hpp>
+#include <libguart/Widgets.hpp>
 
 #include "CliOutput.hpp"
 #include "Serial.hpp"
@@ -32,8 +30,12 @@ int main(int argc, char* argv[])
     // window->moveTo(Point{40, 30});
     // window->resize(Dimensions{8, 6});
     auto label = std::make_shared<Label>(Point{0, 0}, "Hello World!");
+    std::vector<std::string_view> buttons{ "Button1", "Button2" };
+    auto buttonBox = std::make_shared<ButtonBox>(Point{0, 2}, Dimensions{20, 3}, buttons);
+    buttonBox->setActiveButton(0);
 
     window->addWidget(label);
+    window->addWidget(buttonBox);
     window->setLabel("Test Window");
     window2->setLabel("Second Window");
     screen.invalidate();

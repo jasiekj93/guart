@@ -5,7 +5,7 @@
 
 # Platform
 # Uncomment if program platform must be diffrent than the solution
-# PLATFORM := Pc32
+PLATFORM := Pc64
 
 # Target
 target := tester
@@ -62,7 +62,7 @@ ldscript =
 # custom_cxx_flags :=
 
 # Uncomment if you want to add library flags and the end of the linking command (e.g. -pthread)
-# terminating_libs := 
+terminating_libs := -ltinfo 
 
 # Append rest of Makefile from template
 include $(make_dir)/Program.mk

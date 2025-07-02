@@ -8,7 +8,7 @@
             "name": "tester",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/Pc32/debug/tester.elf",
+            "program": "${workspaceFolder}/bin/Pc64/debug/tester.elf",
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
