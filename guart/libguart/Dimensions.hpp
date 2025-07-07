@@ -10,8 +10,8 @@ namespace guart
 {
     struct Dimensions
     {
-        using Width = int;
-        using Height = int;
+        using Width = unsigned int;
+        using Height = unsigned int;
 
         Width width;
         Height height;

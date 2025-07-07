@@ -26,6 +26,8 @@ namespace guart::drawer
         void drawBorder(const Point&, const Dimensions&) const; 
         void drawBoldBorder(const Point&, const Dimensions&) const; 
 
+        void drawBorderTitle(const Point&, const Dimensions&, std::string_view title) const; 
+
         inline Canvas& getCanvas() const { return canvas; }
 
     private:

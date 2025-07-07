@@ -16,30 +16,32 @@ void ButtonBox::draw(const Widget& widget) const
     auto& out = canvas.getOutput();
 
     if (buttonBox.hasBorder())
+    {
         drawBorder(buttonBox.getPosition(), buttonBox.getDimensions());
+        drawBorderTitle(buttonBox.getPosition(), buttonBox.getDimensions(), buttonBox.getTitle());
+    }
 
     auto buttons = buttonBox.getButtons();
 
     if (buttons.empty())
         return;
 
-    auto buttonWidth = buttonBox.getDimensions().width / buttons.size();
-    auto buttonHeight = buttonBox.getDimensions().height;
+    auto buttonStart = Point(buttonBox.getPosition().x + 1, buttonBox.getPosition().y + 1);
+    canvas.moveCursor(buttonStart);
 
     for (size_t i = 0; i < buttons.size(); ++i)
     {
-        auto buttonPosition = Point(buttonBox.getPosition().x + i * buttonWidth + 1, buttonBox.getPosition().y + 1);
-        canvas.moveCursor(buttonPosition);
+        auto buttonWidth = buttonBox.getButtons()[i].size() + 2;
 
-        if(i == buttonBox.getActiveButton())
+        if(i == buttonBox.getActiveButton() and buttonBox.isFocused())
             out << "\e[7m";
         out << '[' << buttons[i] << ']';
 
-        if(i == buttonBox.getActiveButton())
+        if(i == buttonBox.getActiveButton() and buttonBox.isFocused())
             out << "\e[m";
 
-        // Fill the rest of the button space with spaces
-        for (int j = buttons[i].size(); j < buttonWidth - 1; ++j)
+        // // Fill the rest of the button space with spaces
+        // for (int j = buttons[i].size(); j < buttonWidth - 1; ++j)
             out << ' ';
     }
     out.flush();

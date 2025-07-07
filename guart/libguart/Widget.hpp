@@ -15,32 +15,57 @@
 
 namespace guart
 {
+    class FocusController;
+
     class Widget
     {
     public:
-        Widget(const Point& position);
+        class Observer
+        {
+        public:
+            virtual ~Observer() = default;
+
+            virtual void actionCallback(const Widget& widget, std::string_view action) = 0;
+        };
+
+        Widget(const Point& position, std::string_view label = "");
         virtual ~Widget() = default;
 
         void invalidate() const;
         void addWidget(const std::shared_ptr<Widget>&);
         void setDrawer(Drawer* d); 
+        void setFocusController(FocusController*); 
 
         Point getPosition() const;
         virtual Point getContentPosition() const { return getPosition(); }
+
+        inline auto& getLabel() const { return label; }
+        inline void setLabel(std::string_view l) { label = l; }
+        inline void setObserver(Observer* obs) { observer = obs; }
 
         inline void moveTo(const Point& p) { position = p; }
         inline void setParent(Widget* p) { parent = p; }
         inline auto& getChildren() { return children; }
 
+        void setFocus(bool); 
+        inline bool isFocused() const { return focusFlag; }
+
         virtual std::string_view getType() const = 0;
+        virtual bool isFocusable() const { return false; }
 
         virtual void processInput(const std::string_view&) {}
 
+    protected:
+        Observer* observer = nullptr;
+
     private:
         Point position;
-        Drawer* drawer = nullptr;
-
-        Widget* parent = nullptr;
+        std::string label;
         std::vector<std::shared_ptr<Widget>> children;
+        bool focusFlag = false;
+
+        Drawer* drawer = nullptr;
+        Widget* parent = nullptr;
+        FocusController* focusController = nullptr;
     };
 }

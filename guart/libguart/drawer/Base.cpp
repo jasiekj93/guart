@@ -74,3 +74,16 @@ void Base::drawBoldBorder(const Point& point, const Dimensions& dimensions) cons
     out << border::bold::LOWER_RIGHT;
     out.flush();
 }
+
+void Base::drawBorderTitle(const Point& p, const Dimensions& d, std::string_view title) const
+{
+    if(title.empty())
+        return;
+
+    unsigned int titlePosition = (d.width / 2) - (title.size() / 2);
+    auto &out = canvas.getOutput();
+
+    canvas.moveCursor({ p.x + titlePosition, p.y });
+    out << title;
+    out.flush();
+}

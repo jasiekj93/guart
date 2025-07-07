@@ -27,10 +27,17 @@ namespace guart::widget
         inline auto getButtons() const { return buttons; }
         inline bool hasBorder() const { return addBorder; }
 
+        inline void setTitle(std::string_view l) { title = l; }
+        inline std::string_view getTitle() const { return title; }
+
         inline std::string_view getType() const override { return "ButtonBox"; }
+        inline bool isFocusable() const { return true; }
+
+        void processInput(const std::string_view&) override;
 
     private:
         std::vector<std::string_view> buttons;
+        std::string title;
         int activeIndex = -1;
         Dimensions dimensions;
         bool addBorder;

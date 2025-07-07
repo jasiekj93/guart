@@ -1,10 +1,11 @@
 #include "Widget.hpp"
+#include "FocusController.hpp"
 
 using namespace guart;
 
-Widget::Widget(const Point& position)
+Widget::Widget(const Point& position, std::string_view label)
     : position(position)
-    , parent(nullptr)
+    , label(label)
 {
 }
 
@@ -39,6 +40,20 @@ void Widget::setDrawer(Drawer* d)
     }
 }
 
+void Widget::setFocusController(FocusController* controller)
+{
+    if(not controller)
+        return;
+
+    focusController = controller;
+
+    if(isFocusable())
+        controller->addFocusableWidget(this);
+
+    for(auto& child : children)
+        child->setFocusController(controller);
+}
+
 void Widget::addWidget(const std::shared_ptr<Widget>& widget)
 {
     if (not widget)
@@ -49,6 +64,15 @@ void Widget::addWidget(const std::shared_ptr<Widget>& widget)
     if(drawer)
         widget->setDrawer(drawer);
 
+    if(focusController)
+        widget->setFocusController(focusController);
+
     children.push_back(widget);
     
+}
+
+void Widget::setFocus(bool focused)
+{
+    focusFlag = focused;
+    invalidate();
 }

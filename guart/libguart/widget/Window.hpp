@@ -21,12 +21,12 @@ namespace guart::widget
         inline std::string_view getType() const override { return "Window"; }
         inline Point getContentPosition() const override { return getPosition() + Point{1, 1}; }
 
-        inline void setLabel(std::string_view l) { label = l; }
+        inline void setTitle(std::string_view l) { title = l; }
+        inline std::string_view getTitle() const { return title; }
         inline auto& getDimensions() const { return dimensions; }
-        inline std::string_view getLabel() const { return label; }
 
     private:
         Dimensions dimensions;
-        std::string label;
+        std::string title;
     };
 }

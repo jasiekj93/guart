@@ -20,6 +20,7 @@ void Screen::addWidget(const std::shared_ptr<Widget>& widget)
         return;
 
     widget->setDrawer(this);
+    widget->setFocusController(this);
     widgets.push_back(widget);
 }
 
@@ -44,8 +45,9 @@ void Screen::moveCursor(const Point& p) const
 
 void Screen::clear() const
 {
-    output << "\e[2J"; 
-    output << "\e[H"; 
+    output << "\e[?25l"; // Hide cursor
+    output << "\e[2J";  // Clear screen
+    output << "\e[H";  // Move cursor to home position
 }
 
 void Screen::draw(const Widget& widget) const
@@ -56,28 +58,11 @@ void Screen::draw(const Widget& widget) const
         drawer->second->draw(widget);
 }
 
-bool Screen::processInput(const std::string_view& input)
+void Screen::resetOutput()
 {
-    if(input.empty())
-        return true;
-
-    if(input == key::CTRL_C || input == key::CTRL_D)
-    {
-        output << "\e[0m"; // Reset terminal colors
-        output.flush();
-        return false; // Exit the application
-    }
-    else if(input == key::TAB)
-    {
-        changeFocus();
-        return true;
-    }
-    else if(focusedIndex >= 0)
-        widgets[focusedIndex]->processInput(input);
-
-    return true;
-}
-
-void Screen::changeFocus()
-{
+    output << "\e[?25h"; // Show cursor
+    output << "\e[0m"; // Reset terminal colors
+    output << "\e[2J";  // Clear screen
+    output << "\e[H";  // Move cursor to home position
+    output.flush();
 }

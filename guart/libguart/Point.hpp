@@ -10,8 +10,8 @@ namespace guart
 {
     struct Point
     {
-        using X = int;
-        using Y = int;
+        using X = unsigned int;
+        using Y = unsigned int;
 
         X x;
         Y y;

@@ -13,10 +13,11 @@
 #include <libguart/Output.hpp>
 #include <libguart/Canvas.hpp>
 #include <libguart/Widget.hpp>
+#include <libguart/FocusController.hpp>
 
 namespace guart
 {
-    class Screen : public Canvas, public Drawer 
+    class Screen : public Canvas, public Drawer, public FocusController
     {
     public:
         explicit Screen(Output&); 
@@ -32,10 +33,9 @@ namespace guart
         //Drawer
         void draw(const Widget& widget) const override;
 
-        bool processInput(const std::string_view&);
-
     protected:
-        void changeFocus();
+        //FocusController
+        void resetOutput() override;
 
     private:
         Output& output;
