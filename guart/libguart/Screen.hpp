@@ -16,7 +16,7 @@
 
 namespace guart
 {
-    class Screen : public Canvas, public Drawer
+    class Screen : public Canvas, public Drawer 
     {
     public:
         explicit Screen(Output&); 
@@ -32,9 +32,15 @@ namespace guart
         //Drawer
         void draw(const Widget& widget) const override;
 
+        bool processInput(const std::string_view&);
+
+    protected:
+        void changeFocus();
+
     private:
         Output& output;
         std::vector<std::shared_ptr<Widget>> widgets;
         std::map<std::string_view, std::unique_ptr<Drawer>> drawers;
+        int focusedIndex = -1;
     };
 }

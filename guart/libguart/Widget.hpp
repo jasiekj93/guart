@@ -34,6 +34,8 @@ namespace guart
 
         virtual std::string_view getType() const = 0;
 
+        virtual void processInput(const std::string_view&) {}
+
     private:
         Point position;
         Drawer* drawer = nullptr;

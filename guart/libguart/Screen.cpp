@@ -2,6 +2,7 @@
 #include <libguart/drawer/Label.hpp>
 #include <libguart/drawer/Window.hpp>
 #include <libguart/drawer/ButtonBox.hpp>
+#include <libguart/Key.hpp>
 
 using namespace guart;
 
@@ -53,4 +54,30 @@ void Screen::draw(const Widget& widget) const
 
     if (drawer != drawers.end())
         drawer->second->draw(widget);
+}
+
+bool Screen::processInput(const std::string_view& input)
+{
+    if(input.empty())
+        return true;
+
+    if(input == key::CTRL_C || input == key::CTRL_D)
+    {
+        output << "\e[0m"; // Reset terminal colors
+        output.flush();
+        return false; // Exit the application
+    }
+    else if(input == key::TAB)
+    {
+        changeFocus();
+        return true;
+    }
+    else if(focusedIndex >= 0)
+        widgets[focusedIndex]->processInput(input);
+
+    return true;
+}
+
+void Screen::changeFocus()
+{
 }
