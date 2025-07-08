@@ -20,6 +20,6 @@ void Toast::processInput(const std::string_view& input)
         if (onAction)
             onAction(*this, "");
 
-        remove();
+        dispose();
     }
 }

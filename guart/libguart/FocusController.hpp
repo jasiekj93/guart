@@ -21,7 +21,7 @@ namespace guart
         virtual void resetOutput() = 0;
 
     private:
-        std::deque<Widget*> focusableWidgets;
         std::deque<Widget*>::iterator focusedWidget = focusableWidgets.end();
+        std::deque<Widget*> focusableWidgets;
     };
 }

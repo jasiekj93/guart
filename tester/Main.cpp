@@ -46,11 +46,9 @@ int main(int argc, char* argv[])
     buttonBox2->setTitle("Button Box 2");
 
     Widget::Signal buttonAction = [&screen](Widget& widget, std::string_view action) {
-        
         auto toast = std::make_shared<guart::widget::Toast>(guart::Point{20, 20}, "Button clicked: " + std::string(action));
         screen.addWidget(toast);
         screen.invalidate();
-        widget.dispose();
     };
 
     buttonBox2->onAction = buttonAction;
@@ -61,8 +59,19 @@ int main(int argc, char* argv[])
         Point{5, 5}, Dimensions{30, 10}, "This is a modal window\nAlso checking if it works\nwith multiple lines.", 
         widget::ButtonBox::Buttons{"OK", "Cancel"});
     modalWindow->setTitle("Modal Window");
-    modalWindow->onAction = buttonAction;
+    modalWindow->setLabel("modalWindow");
     screen.addWidget(modalWindow);
+
+    Widget::Signal modalAction = [&screen](Widget& widget, std::string_view action) {
+        
+        auto toast = std::make_shared<guart::widget::Toast>(guart::Point{20, 20}, "Button clicked: " + std::string(action));
+        screen.addWidget(toast);
+        screen.invalidate();
+        toast->onDispose = [&widget](Widget& w, std::string_view) {
+            widget.dispose();
+        };
+    };
+    modalWindow->onAction = modalAction;
 
     screen.invalidate();
 

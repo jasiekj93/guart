@@ -9,11 +9,14 @@ ModalWindow::ModalWindow(const Point& p, const Dimensions& d,
     : Window(p, d)
 {
     auto textBox = std::make_shared<TextBox>(Point{1, 1}, message);
+    textBox->setLabel("textBox-modal");
     auto buttonBox = std::make_shared<ButtonBox>(Point{0, d.height - 3}, 
         Dimensions{d.width - 2, 1}, 
         buttons,
         false);
+    buttonBox->setLabel("buttonBox-modal");
     auto line = std::make_shared<Line>(Point{0, d.height - 4}, d.width, false);
+    line->setLabel("line-modal");
 
     addWidget(textBox);
     addWidget(buttonBox);
@@ -21,7 +24,7 @@ ModalWindow::ModalWindow(const Point& p, const Dimensions& d,
 
     buttonBox->onAction = [this](Widget& w, std::string_view action) {
         if(onAction)
-            onAction(w, action);
+            onAction(*this, action);
     };
 }
 

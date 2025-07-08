@@ -37,15 +37,23 @@ void FocusController::removeFocusableWidget(Widget* widget)
     if(widget == nullptr)
         return;
 
-    if(*focusedWidget == widget and
-        focusableWidgets.size() == 1)
-    {
-            focusedWidget = focusableWidgets.end();
-    }
+    auto it = std::find(focusableWidgets.begin(), focusableWidgets.end(), widget);
 
-    focusableWidgets.erase(std::remove_if(focusableWidgets.begin(), focusableWidgets.end(),
-                                        [widget](const Widget* w) { return w == widget; }),
-                        focusableWidgets.end());
+    if(it == focusableWidgets.end())
+        return; 
+
+    if(focusedWidget == it)
+    {
+        if(focusableWidgets.size() == 1)
+            focusedWidget = focusableWidgets.end();
+        // else if (focusedWidget == focusableWidgets.begin())
+        //     focusedWidget++;
+        // else
+        //     focusedWidget--;
+    } 
+
+    focusableWidgets.erase(it);
+    focusableWidgets.resize(focusableWidgets.size());
 }
 
 bool FocusController::processInput(const std::string_view& input)

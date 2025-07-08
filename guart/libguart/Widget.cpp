@@ -84,8 +84,7 @@ void Widget::removeWidget(Widget* child)
                                     [child](const std::shared_ptr<Widget>& w) { return w.get() == child; }),
                     children.end());
     
-    if(focusController)
-        focusController->removeFocusableWidget(child);
+    
 
     invalidate();
 }
@@ -98,8 +97,20 @@ bool Widget::isFocused() const
         return focusController->isWidgetFocused(this);
 }
 
-void Widget::remove()
+void Widget::dispose()
 {
+    if(onDispose)
+        onDispose(*this, "");
+
+    if(focusController)
+        focusController->removeFocusableWidget(this);
+
+    while(not children.empty())
+    {
+        if(children.front())
+            children.front()->dispose();
+    }
+
     if(parent)
         parent->removeWidget(this);
 }

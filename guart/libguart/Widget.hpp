@@ -44,7 +44,7 @@ namespace guart
         inline void moveTo(const Point& p) { position = p; }
         inline void setParent(Parent* p) { parent = p; }
         inline auto& getChildren() { return children; }
-        inline void dispose() { isMarkedDisposed = true; }
+        void dispose(); 
 
         bool isFocused() const;
 
@@ -59,14 +59,11 @@ namespace guart
         Signal onDispose;
 
     protected:
-        inline bool isDisposed() const { return isMarkedDisposed; }
-        void remove();
 
     private:
         Point position;
         std::string label;
         std::vector<std::shared_ptr<Widget>> children;
-        bool isMarkedDisposed = false;
 
         Drawer* drawer = nullptr;
         Parent* parent = nullptr;
