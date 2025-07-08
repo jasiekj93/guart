@@ -51,8 +51,7 @@ namespace guart
         inline void setParent(Parent* p) { parent = p; }
         inline auto& getChildren() { return children; }
 
-        void setFocus(bool); 
-        inline bool isFocused() const { return focusFlag; }
+        bool isFocused() const;
 
         virtual std::string_view getType() const = 0;
         virtual bool isFocusable() const { return false; }
@@ -61,7 +60,7 @@ namespace guart
         virtual void processInput(const std::string_view&) {}
 
     protected:
-        void remove(Widget*);
+        void remove();
 
         Observer* observer = nullptr;
 
@@ -69,7 +68,6 @@ namespace guart
         Point position;
         std::string label;
         std::vector<std::shared_ptr<Widget>> children;
-        bool focusFlag = false;
 
         Drawer* drawer = nullptr;
         Parent* parent = nullptr;

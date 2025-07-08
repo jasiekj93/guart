@@ -84,13 +84,16 @@ void Widget::removeWidget(Widget* child)
     invalidate();
 }
 
-void Widget::setFocus(bool focused)
+bool Widget::isFocused() const
 {
-    focusFlag = focused;
+    if(not focusController)
+        return false;
+    else
+        return focusController->isWidgetFocused(this);
 }
 
-void Widget::remove(Widget* widget)
+void Widget::remove()
 {
     if(parent)
-        parent->removeWidget(widget);
+        parent->removeWidget(this);
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vector>
+#include <deque>
 
 #include <libguart/Widget.hpp>
 
@@ -15,13 +15,13 @@ namespace guart
         void removeFocusableWidget(Widget* widget);
         
         bool processInput(const std::string_view&);
+        bool isWidgetFocused(const Widget*) const;
 
     protected:
         virtual void resetOutput() = 0;
 
     private:
-        std::vector<Widget*> focusableWidgets;
-        int focusedIndex = -1;
-        Widget* modalWidget = nullptr;
+        std::deque<Widget*> focusableWidgets;
+        std::deque<Widget*>::iterator focusedWidget = focusableWidgets.end();
     };
 }

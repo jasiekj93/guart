@@ -10,5 +10,7 @@
 #include <libguart/widget/Label.hpp>
 #include <libguart/widget/ButtonBox.hpp>
 #include <libguart/widget/Toast.hpp>
+#include <libguart/widget/ModalWindow.hpp>
+#include <libguart/widget/TextBox.hpp>
 
 #include <libguart/Screen.hpp>

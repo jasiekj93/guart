@@ -1,5 +1,11 @@
 #pragma once
 
+/**
+ * @file Label.hpp
+ * @author Adrian Szczepanski
+ * @date 08-07-2025
+ */
+
 #include <string>
 
 #include <libguart/Widget.hpp>

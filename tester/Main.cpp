@@ -29,8 +29,8 @@ int main(int argc, char* argv[])
     screen.addWidget(window);
 
     auto label = std::make_shared<widget::Label>(Point{0, 0}, "Hello World!");
-    std::vector<std::string_view> buttonBoxButtons{ "Button1", "Button2" };
-    std::vector<std::string_view> buttonBoxButtons2{ "Siema", "Mordo" };
+    widget::ButtonBox::Buttons buttonBoxButtons{ "Button1", "Button2" };
+    widget::ButtonBox::Buttons buttonBoxButtons2{ "Siema", "Mordo" };
     auto buttonBox = std::make_shared<widget::ButtonBox>(Point{0, 2}, Dimensions{20, 1}, buttonBoxButtons);
     auto buttonBox2 = std::make_shared<widget::ButtonBox>(Point{1, 4}, Dimensions{20, 1}, buttonBoxButtons2);
 
@@ -42,6 +42,13 @@ int main(int argc, char* argv[])
     buttonBox2->setObserver(&buttonObserver);
     buttonBox->setObserver(&buttonObserver);
     screen.addWidget(buttonBox2);
+
+    auto modalWindow = std::make_shared<widget::ModalWindow>(
+        Point{5, 5}, Dimensions{30, 10}, "This is a modal window\nAlso checking if it works\nwith multiple lines.", 
+        widget::ButtonBox::Buttons{"OK", "Cancel"});
+    modalWindow->setTitle("Modal Window");
+    modalWindow->setObserver(&buttonObserver);
+    screen.addWidget(modalWindow);
 
     screen.invalidate();
 

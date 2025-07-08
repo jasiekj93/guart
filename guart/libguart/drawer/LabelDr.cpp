@@ -13,14 +13,14 @@ void Label::draw(const Widget& widget) const
 {
     auto& label = static_cast<const widget::Label&>(widget);
 
-    if (not label.getText().empty())
-    {
-        auto& canvas = getCanvas();
-        auto& out = canvas.getOutput();
+    if (label.getText().empty())
+        return;
+    
+    auto& canvas = getCanvas();
+    auto& out = canvas.getOutput();
 
-        canvas.moveCursor(label.getPosition());
-        out << label.getText();
-        out.flush();
-    }
+    canvas.moveCursor(label.getPosition());
+    out << label.getText();
+    out.flush();
 }
 

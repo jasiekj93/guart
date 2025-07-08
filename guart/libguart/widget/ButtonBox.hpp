@@ -17,7 +17,9 @@ namespace guart::widget
     class ButtonBox : public Widget
     {
     public:
-        ButtonBox(const Point&, const Dimensions&, const std::vector<std::string_view>& buttons, bool addBorder = true);
+        using Buttons = std::vector<std::string_view>;
+
+        ButtonBox(const Point&, const Dimensions&, const Buttons& buttons, bool addBorder = true);
 
         void addButton(const std::string_view& button);
         bool setActiveButton(int index);
@@ -36,7 +38,7 @@ namespace guart::widget
         void processInput(const std::string_view&) override;
 
     private:
-        std::vector<std::string_view> buttons;
+        Buttons buttons;
         std::string title;
         int activeIndex = -1;
         Dimensions dimensions;
