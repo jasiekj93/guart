@@ -36,6 +36,10 @@ int main(int argc, char* argv[])
     window2->setTitle("Second Window");
     buttonBox2->setTitle("Button Box 2");
     screen.addWidget(buttonBox2);
+
+    auto toast = std::make_shared<widget::Toast>(Point{5, 5}, "This is a toast message!");
+    screen.addWidget(toast);
+
     screen.invalidate();
 
     TerminalInput termInput;

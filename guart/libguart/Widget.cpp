@@ -1,5 +1,6 @@
 #include "Widget.hpp"
 #include "FocusController.hpp"
+#include <algorithm>
 
 using namespace guart;
 
@@ -54,6 +55,16 @@ void Widget::setFocusController(FocusController* controller)
         child->setFocusController(controller);
 }
 
+void Widget::removeChild(Widget* child)
+{
+    children.erase(std::remove_if(children.begin(), children.end(),
+                                    [child](const std::shared_ptr<Widget>& w) { return w.get() == child; }),
+                    children.end());
+    
+    if(focusController)
+        focusController->removeFocusableWidget(child);
+}
+
 void Widget::addWidget(const std::shared_ptr<Widget>& widget)
 {
     if (not widget)
@@ -75,4 +86,10 @@ void Widget::setFocus(bool focused)
 {
     focusFlag = focused;
     invalidate();
+}
+
+void Widget::remove(Widget* widget)
+{
+    if(parent)
+        parent->removeChild(widget);
 }

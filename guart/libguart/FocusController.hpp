@@ -12,6 +12,8 @@ namespace guart
         virtual ~FocusController() = default;
 
         void addFocusableWidget(Widget*);
+        void removeFocusableWidget(Widget* widget);
+        
         bool processInput(const std::string_view&);
 
     protected:

@@ -25,7 +25,7 @@ namespace guart
         public:
             virtual ~Observer() = default;
 
-            virtual void actionCallback(const Widget& widget, std::string_view action) = 0;
+            virtual void actionCallback(const Widget& widget, std::string_view action = "") = 0;
         };
 
         Widget(const Point& position, std::string_view label = "");
@@ -35,6 +35,7 @@ namespace guart
         void addWidget(const std::shared_ptr<Widget>&);
         void setDrawer(Drawer* d); 
         void setFocusController(FocusController*); 
+        void removeChild(Widget* child);
 
         Point getPosition() const;
         virtual Point getContentPosition() const { return getPosition(); }
@@ -52,10 +53,13 @@ namespace guart
 
         virtual std::string_view getType() const = 0;
         virtual bool isFocusable() const { return false; }
+        virtual bool isModal() const { return false; }
 
         virtual void processInput(const std::string_view&) {}
 
     protected:
+        void remove(Widget*);
+
         Observer* observer = nullptr;
 
     private:
