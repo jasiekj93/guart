@@ -9,6 +9,7 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include <functional>
 
 #include <libguart/Point.hpp>
 #include <libguart/Drawer.hpp>
@@ -26,11 +27,13 @@ namespace guart
         public:
             virtual ~Observer() = default;
 
-            virtual void actionCallback(const Widget& widget, std::string_view action = "") = 0;
+            virtual void actionCallback(Widget&, std::string_view action = "") = 0;
         };
 
+        using Signal = std::function<void(Widget&, std::string_view)>;
+
         Widget(const Point& position, std::string_view label = "");
-        virtual ~Widget() = default;
+        virtual ~Widget();
 
         void invalidate() const;
 
@@ -50,6 +53,7 @@ namespace guart
         inline void moveTo(const Point& p) { position = p; }
         inline void setParent(Parent* p) { parent = p; }
         inline auto& getChildren() { return children; }
+        inline void dispose() { isMarkedDisposed = true; }
 
         bool isFocused() const;
 
@@ -59,7 +63,12 @@ namespace guart
 
         virtual void processInput(const std::string_view&) {}
 
+        Signal onAction;
+        Signal onFocus;
+        Signal onDispose;
+
     protected:
+        inline bool isDisposed() const { return isMarkedDisposed; }
         void remove();
 
         Observer* observer = nullptr;
@@ -68,6 +77,7 @@ namespace guart
         Point position;
         std::string label;
         std::vector<std::shared_ptr<Widget>> children;
+        bool isMarkedDisposed = false;
 
         Drawer* drawer = nullptr;
         Parent* parent = nullptr;

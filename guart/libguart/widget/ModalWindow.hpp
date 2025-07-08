@@ -9,6 +9,7 @@
 #include <libguart/widget/Window.hpp>
 #include <libguart/widget/TextBox.hpp>
 #include <libguart/widget/ButtonBox.hpp>
+#include <libguart/widget/Line.hpp>
 
 namespace guart::widget
 {
@@ -19,7 +20,7 @@ namespace guart::widget
             std::string_view message,
             const ButtonBox::Buttons& buttons);
 
-        void actionCallback(const Widget&, std::string_view action) override;
+        void actionCallback(Widget&, std::string_view action) override;
 
         inline std::string_view getType() const override { return "Window"; }
         inline bool isModal() const override { return true; }

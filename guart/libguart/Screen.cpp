@@ -7,6 +7,7 @@
 #include <libguart/drawer/ButtonBox.hpp>
 #include <libguart/drawer/Toast.hpp>
 #include <libguart/drawer/TextBox.hpp>
+#include <libguart/drawer/Line.hpp>
 #include <libguart/Key.hpp>
 
 using namespace guart;
@@ -19,6 +20,7 @@ Screen::Screen(Output& output)
     drawers["ButtonBox"] = std::make_unique<drawer::ButtonBox>(*this);
     drawers["Toast"] = std::make_unique<drawer::Toast>(*this);
     drawers["TextBox"] = std::make_unique<drawer::TextBox>(*this);
+    drawers["Line"] = std::make_unique<drawer::Line>(*this);
 }
 
 void Screen::addWidget(const std::shared_ptr<Widget>& widget)

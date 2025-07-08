@@ -13,16 +13,18 @@ ModalWindow::ModalWindow(const Point& p, const Dimensions& d,
         Dimensions{d.width - 2, 1}, 
         buttons,
         false);
+    auto line = std::make_shared<Line>(Point{0, d.height - 4}, d.width, false);
 
     addWidget(textBox);
     addWidget(buttonBox);
+    addWidget(line);
     buttonBox->setObserver(this);
 }
 
-void ModalWindow::actionCallback(const Widget& widget, std::string_view action)
+void ModalWindow::actionCallback(Widget& widget, std::string_view action)
 {
-    if(observer)
-        observer->actionCallback(widget, action);
+    if(onAction)
+        onAction(widget, action);
 }
 
 void ModalWindow::processInput(const std::string_view& input)

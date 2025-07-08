@@ -8,7 +8,7 @@ class ButtonObserver : public guart::Widget::Observer
 public:
     ButtonObserver(guart::Screen* screen) : screen(screen) {}
 
-    void actionCallback(const guart::Widget& widget, std::string_view action = "") override;
+    void actionCallback(guart::Widget&, std::string_view action = "") override;
 
 private:
     guart::Screen* screen;

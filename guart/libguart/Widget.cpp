@@ -10,6 +10,12 @@ Widget::Widget(const Point& position, std::string_view label)
 {
 }
 
+Widget::~Widget()
+{
+    if(isFocusable() and focusController)
+        focusController->removeFocusableWidget(this);
+}
+
 void Widget::invalidate() const
 {
     if(drawer)
