@@ -55,7 +55,7 @@ void ButtonBox::processInput(const std::string_view& input)
              input == key::CR_NL or 
              input == key::NEW_LINE) 
     {
-        if (observer)
-            observer->actionCallback(*this, buttons[activeIndex]);
+        if (onAction)
+            onAction(*this, buttons[activeIndex]);
     }
 }

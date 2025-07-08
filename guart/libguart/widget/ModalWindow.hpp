@@ -13,14 +13,12 @@
 
 namespace guart::widget
 {
-    class ModalWindow : public Window, public Widget::Observer
+    class ModalWindow : public Window
     {
     public:
         ModalWindow(const Point&, const Dimensions&, 
             std::string_view message,
             const ButtonBox::Buttons& buttons);
-
-        void actionCallback(Widget&, std::string_view action) override;
 
         inline std::string_view getType() const override { return "Window"; }
         inline bool isModal() const override { return true; }

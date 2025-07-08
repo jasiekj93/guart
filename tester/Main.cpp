@@ -21,33 +21,47 @@ int main(int argc, char* argv[])
     // Serial output("/dev/ttyUSB1");
 
     Screen screen(output);
-    ButtonObserver buttonObserver(&screen); // Initialize with nullptr, will set later
+    // ButtonObserver buttonObserver(&screen); // Initialize with nullptr, will set later
 
     auto window = std::make_shared<widget::Window>(Point{10, 10}, Dimensions{30, 10});
+    window->setLabel("window");
     auto window2 = std::make_shared<widget::Window>(Point{0, 1}, Dimensions{30, 2});
+    window2->setLabel("window2");
     screen.addWidget(window2);
     screen.addWidget(window);
 
     auto label = std::make_shared<widget::Label>(Point{0, 0}, "Hello World!");
+    label->setLabel("label");
     widget::ButtonBox::Buttons buttonBoxButtons{ "Button1", "Button2" };
     widget::ButtonBox::Buttons buttonBoxButtons2{ "Siema", "Mordo" };
     auto buttonBox = std::make_shared<widget::ButtonBox>(Point{0, 2}, Dimensions{20, 1}, buttonBoxButtons);
+    buttonBox->setLabel("buttonBox");
     auto buttonBox2 = std::make_shared<widget::ButtonBox>(Point{1, 4}, Dimensions{20, 1}, buttonBoxButtons2);
+    buttonBox2->setLabel("buttonBox2");
 
     window->addWidget(label);
     window->addWidget(buttonBox);
     window->setTitle("Test Window");
     window2->setTitle("Second Window");
     buttonBox2->setTitle("Button Box 2");
-    buttonBox2->setObserver(&buttonObserver);
-    buttonBox->setObserver(&buttonObserver);
+
+    Widget::Signal buttonAction = [&screen](Widget& widget, std::string_view action) {
+        
+        auto toast = std::make_shared<guart::widget::Toast>(guart::Point{20, 20}, "Button clicked: " + std::string(action));
+        screen.addWidget(toast);
+        screen.invalidate();
+        widget.dispose();
+    };
+
+    buttonBox2->onAction = buttonAction;
+    buttonBox->onAction = buttonAction;
     screen.addWidget(buttonBox2);
 
     auto modalWindow = std::make_shared<widget::ModalWindow>(
         Point{5, 5}, Dimensions{30, 10}, "This is a modal window\nAlso checking if it works\nwith multiple lines.", 
         widget::ButtonBox::Buttons{"OK", "Cancel"});
     modalWindow->setTitle("Modal Window");
-    modalWindow->setObserver(&buttonObserver);
+    modalWindow->onAction = buttonAction;
     screen.addWidget(modalWindow);
 
     screen.invalidate();

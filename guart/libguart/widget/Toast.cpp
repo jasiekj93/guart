@@ -17,8 +17,8 @@ void Toast::processInput(const std::string_view& input)
         input == key::CR_NL or
         input == key::NEW_LINE)
     {
-        if (observer)
-            observer->actionCallback(*this);
+        if (onAction)
+            onAction(*this, "");
 
         remove();
     }

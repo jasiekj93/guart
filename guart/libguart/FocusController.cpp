@@ -14,9 +14,20 @@ void FocusController::addFocusableWidget(Widget* widget)
     if(auto it = std::find(focusableWidgets.begin(), focusableWidgets.end(), widget);
        it == focusableWidgets.end())
     {
-        focusableWidgets.push_front(widget);
+        if(widget->isModal())
+        {
+            if(focusedWidget == focusableWidgets.begin())
+            {
+                focusableWidgets.push_front(widget);
+                focusedWidget = focusableWidgets.begin();
+            }
+            else
+                focusableWidgets.insert(focusedWidget, widget);
+        }
+        else 
+            focusableWidgets.push_front(widget);
 
-        if(widget->isModal() or focusableWidgets.size() == 1)
+        if(focusableWidgets.size() == 1)
             focusedWidget = focusableWidgets.begin();
     }
 }
@@ -26,14 +37,10 @@ void FocusController::removeFocusableWidget(Widget* widget)
     if(widget == nullptr)
         return;
 
-    if(*focusedWidget == widget)
+    if(*focusedWidget == widget and
+        focusableWidgets.size() == 1)
     {
-        if(focusableWidgets.size() == 1)
             focusedWidget = focusableWidgets.end();
-        else if(focusedWidget == focusableWidgets.begin())
-            focusedWidget = focusableWidgets.begin() + 1; 
-        else
-            focusedWidget -= 1;
     }
 
     focusableWidgets.erase(std::remove_if(focusableWidgets.begin(), focusableWidgets.end(),

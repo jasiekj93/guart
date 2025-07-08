@@ -18,13 +18,11 @@ ModalWindow::ModalWindow(const Point& p, const Dimensions& d,
     addWidget(textBox);
     addWidget(buttonBox);
     addWidget(line);
-    buttonBox->setObserver(this);
-}
 
-void ModalWindow::actionCallback(Widget& widget, std::string_view action)
-{
-    if(onAction)
-        onAction(widget, action);
+    buttonBox->onAction = [this](Widget& w, std::string_view action) {
+        if(onAction)
+            onAction(w, action);
+    };
 }
 
 void ModalWindow::processInput(const std::string_view& input)
