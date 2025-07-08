@@ -1,4 +1,7 @@
 #include "Screen.hpp"
+
+#include <algorithm>
+
 #include <libguart/drawer/Label.hpp>
 #include <libguart/drawer/Window.hpp>
 #include <libguart/drawer/ButtonBox.hpp>
@@ -23,7 +26,18 @@ void Screen::addWidget(const std::shared_ptr<Widget>& widget)
 
     widget->setDrawer(this);
     widget->setFocusController(this);
+    widget->setParent(this);
     widgets.push_back(widget);
+}
+
+void Screen::removeWidget(Widget* child)
+{
+    widgets.erase(std::remove_if(widgets.begin(), widgets.end(),
+                                    [child](const std::shared_ptr<Widget>& w) { return w.get() == child; }),
+                    widgets.end());
+    
+    removeFocusableWidget(child);
+    invalidate();
 }
 
 void Screen::invalidate() const

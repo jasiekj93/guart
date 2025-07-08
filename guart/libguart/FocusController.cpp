@@ -14,23 +14,44 @@ void FocusController::addFocusableWidget(Widget* widget)
     if(auto it = std::find(focusableWidgets.begin(), focusableWidgets.end(), widget);
        it == focusableWidgets.end())
     {
-        focusableWidgets.push_back(widget);
-
-        if(focusedIndex < 0)
-        {
-            focusedIndex = 0; 
-            widget->setFocus(true);
-        }
-
         if(widget->isModal())
         {
             for(auto& w : focusableWidgets)
                 w->setFocus(false); 
 
             widget->setFocus(true);
-            focusedIndex = focusableWidgets.size() - 1; // Set focus to the last modal widget
+            modalWidget = widget;
+        }
+        else
+        {
+            focusableWidgets.push_back(widget);
+
+            if(focusedIndex < 0)
+            {
+                focusedIndex = 0; 
+                widget->setFocus(true);
+            }
         }
     }
+}
+
+void FocusController::removeFocusableWidget(Widget* widget)
+{
+    if(widget == modalWidget)
+    {
+        modalWidget->setFocus(false);
+        modalWidget = nullptr;
+
+        if(focusedIndex >= 0)
+            focusableWidgets[focusedIndex]->setFocus(true);
+    }
+    else
+    {
+        focusableWidgets.erase(std::remove_if(focusableWidgets.begin(), focusableWidgets.end(),
+                                            [widget](const Widget* w) { return w == widget; }),
+                            focusableWidgets.end());
+    }
+
 }
 
 bool FocusController::processInput(const std::string_view& input)
@@ -45,7 +66,7 @@ bool FocusController::processInput(const std::string_view& input)
     }
     else if (input == key::TAB)
     {
-        if(focusableWidgets[focusedIndex]->isModal())
+        if(modalWidget)
             return true; // Do not change focus if the current widget is modal
 
         auto oldIndex = focusedIndex;
@@ -53,11 +74,19 @@ bool FocusController::processInput(const std::string_view& input)
 
         focusableWidgets[oldIndex]->setFocus(false);
         focusableWidgets[focusedIndex]->setFocus(true);
+
+        focusableWidgets[focusedIndex]->invalidate();
+        focusableWidgets[oldIndex]->invalidate();
     }
     // else if (input == key::SHIFT_TAB)
     //     focusedIndex = (focusedIndex - 1 + focusableWidgets.size()) % focusableWidgets.size();
     else
-        focusableWidgets[focusedIndex]->processInput(input);
+    {
+        if(modalWidget)
+            modalWidget->processInput(input);
+        else
+            focusableWidgets[focusedIndex]->processInput(input);
+    }
 
     return true;
 }

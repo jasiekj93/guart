@@ -51,7 +51,9 @@ void ButtonBox::processInput(const std::string_view& input)
             invalidate();
         }
     }
-    else if (input == key::ENTER) 
+    else if (input == key::CR or 
+             input == key::CR_NL or 
+             input == key::NEW_LINE) 
     {
         if (observer)
             observer->actionCallback(*this, buttons[activeIndex]);

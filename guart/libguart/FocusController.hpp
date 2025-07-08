@@ -22,5 +22,6 @@ namespace guart
     private:
         std::vector<Widget*> focusableWidgets;
         int focusedIndex = -1;
+        Widget* modalWidget = nullptr;
     };
 }

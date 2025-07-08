@@ -12,12 +12,13 @@
 
 #include <libguart/Point.hpp>
 #include <libguart/Drawer.hpp>
+#include <libguart/Parent.hpp>
 
 namespace guart
 {
     class FocusController;
 
-    class Widget
+    class Widget : public Parent
     {
     public:
         class Observer
@@ -32,20 +33,22 @@ namespace guart
         virtual ~Widget() = default;
 
         void invalidate() const;
+
         void addWidget(const std::shared_ptr<Widget>&);
+        void removeWidget(Widget* child) override;
+
         void setDrawer(Drawer* d); 
         void setFocusController(FocusController*); 
-        void removeChild(Widget* child);
 
         Point getPosition() const;
-        virtual Point getContentPosition() const { return getPosition(); }
+        virtual Point getContentPosition() const override { return getPosition(); }
 
         inline auto& getLabel() const { return label; }
         inline void setLabel(std::string_view l) { label = l; }
         inline void setObserver(Observer* obs) { observer = obs; }
 
         inline void moveTo(const Point& p) { position = p; }
-        inline void setParent(Widget* p) { parent = p; }
+        inline void setParent(Parent* p) { parent = p; }
         inline auto& getChildren() { return children; }
 
         void setFocus(bool); 
@@ -69,7 +72,7 @@ namespace guart
         bool focusFlag = false;
 
         Drawer* drawer = nullptr;
-        Widget* parent = nullptr;
+        Parent* parent = nullptr;
         FocusController* focusController = nullptr;
     };
 }

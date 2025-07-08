@@ -11,7 +11,11 @@ Toast::Toast(const Point& position, std::string_view message)
 
 void Toast::processInput(const std::string_view& input)
 {
-    if (input == key::ENTER or input == key::ESC)
+    if (input == key::CR or 
+        input == key::ESC or
+        input == key::SPACE or
+        input == key::CR_NL or
+        input == key::NEW_LINE)
     {
         if (observer)
             observer->actionCallback(*this);

@@ -13,16 +13,18 @@
 #include <libguart/Output.hpp>
 #include <libguart/Canvas.hpp>
 #include <libguart/Widget.hpp>
+#include <libguart/Parent.hpp>
 #include <libguart/FocusController.hpp>
 
 namespace guart
 {
-    class Screen : public Canvas, public Drawer, public FocusController
+    class Screen : public Canvas, public Drawer, public FocusController, public Parent
     {
     public:
         explicit Screen(Output&); 
 
         void addWidget(const std::shared_ptr<Widget>&);
+        void removeWidget(Widget* child) override;
         void invalidate() const;
 
         //Canvas

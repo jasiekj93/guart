@@ -13,7 +13,9 @@ namespace guart::key
     static constexpr auto PAGE_UP = "\x1b[5~";    // Page Up
     static constexpr auto PAGE_DOWN = "\x1b[6~";  // Page Down
     static constexpr auto ESC = "\x1b";           // Escape key
-    static constexpr auto ENTER = "\r";           // Enter key
+    static constexpr auto CR = "\r";              // Enter key
+    static constexpr auto NEW_LINE = "\n";        // New line key
+    static constexpr auto CR_NL = "\r\n";         // Carriage return + new line key
     static constexpr auto BACKSPACE = "\x7f";     // Backspace key
     static constexpr auto TAB = "\t";             // Tab key
     static constexpr auto SPACE = " ";            // Space key
