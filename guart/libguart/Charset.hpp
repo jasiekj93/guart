@@ -44,7 +44,7 @@ namespace guart
         static constexpr auto REVERSE_OFF = "\e[m";
     }
 
-    static constexpr auto CHECK_BOX = "☑";
+    static constexpr auto CHECK_BOX_CHECKED = "☒";
     static constexpr auto CHECK_BOX_UNCHECKED = "☐";
     static constexpr auto RADIO_BUTTON_CHECKED = "◉";
     static constexpr auto RADIO_BUTTON_UNCHECKED = "○";

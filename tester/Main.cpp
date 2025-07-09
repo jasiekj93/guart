@@ -74,7 +74,7 @@ int main(int argc, char* argv[])
     // modalWindow->onAction = modalAction;
 
 
-    auto list = std::make_shared<widget::RadioList>(Point{50, 6}, Dimensions{20, 10}, 
+    auto list = std::make_shared<widget::CheckList>(Point{50, 6}, Dimensions{20, 10}, 
         widget::List::Items{},
         true);
 
