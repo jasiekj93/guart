@@ -9,7 +9,7 @@ Toast::Toast(const Point& position, std::string_view message)
 {
 }
 
-void Toast::processInput(const std::string_view& input)
+void Toast::processKey(const std::string_view& input)
 {
     if (input == key::CR or 
         input == key::ESC or

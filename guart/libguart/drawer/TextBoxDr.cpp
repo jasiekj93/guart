@@ -9,9 +9,9 @@ TextBox::TextBox(Canvas& canvas)
 {
 }
 
-void TextBox::draw(const Widget& widget) const
+void TextBox::draw(const Drawable& drawable) const
 {
-    auto& textBox = static_cast<const widget::TextBox&>(widget);
+    auto& textBox = static_cast<const widget::TextBox&>(drawable);
     auto& text = textBox.getText();
 
     if (text.empty())

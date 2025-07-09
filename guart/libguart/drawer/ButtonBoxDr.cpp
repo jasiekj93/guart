@@ -9,9 +9,9 @@ ButtonBox::ButtonBox(Canvas& canvas)
 {
 }
 
-void ButtonBox::draw(const Widget& widget) const
+void ButtonBox::draw(const Drawable& drawable) const
 {
-    auto& buttonBox = static_cast<const guart::widget::ButtonBox&>(widget);
+    auto& buttonBox = static_cast<const guart::widget::ButtonBox&>(drawable);
     auto& canvas = getCanvas();
     auto& out = canvas.getOutput();
 

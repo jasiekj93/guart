@@ -8,9 +8,9 @@ Toast::Toast(Canvas& canvas)
 {
 }
 
-void Toast::draw(const Widget& widget) const
+void Toast::draw(const Drawable& drawable) const
 {
-    auto& toast = static_cast<const guart::widget::Toast&>(widget);
+    auto& toast = static_cast<const guart::widget::Toast&>(drawable);
     auto& canvas = getCanvas();
     auto& out = canvas.getOutput();
 

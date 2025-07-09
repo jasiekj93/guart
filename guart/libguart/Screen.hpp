@@ -23,26 +23,27 @@ namespace guart
     public:
         explicit Screen(Output&); 
 
-        void addWidget(const std::shared_ptr<Widget>&);
-        void removeWidget(Widget* child) override;
-        void invalidate() const;
+        //Parent
+        void invalidate() const override;
+        inline std::string_view getType() const override { return "Screen"; }
 
         //Canvas
-        void moveCursor(const Point& p) const override;
+        void moveCursor(const Point&) const override;
         inline Output& getOutput() const override { return output; }
         void clear() const override;
 
         //Drawer
-        void draw(const Widget& widget) const override;
+        void draw(const Drawable&) const override;
 
     protected:
         //FocusController
         void resetOutput() override;
 
+        //Parent
+        inline void processKey(const std::string_view& input) override {}
+
     private:
         Output& output;
-        std::vector<std::shared_ptr<Widget>> widgets;
         std::map<std::string_view, std::unique_ptr<Drawer>> drawers;
-        int focusedIndex = -1;
     };
 }

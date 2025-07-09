@@ -15,6 +15,6 @@ namespace guart::drawer
     public:
         explicit Toast(Canvas& canvas);
 
-        void draw(const Widget& toast) const override;
+        void draw(const Drawable&) const override;
     };
 }

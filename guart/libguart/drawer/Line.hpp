@@ -15,7 +15,7 @@ namespace guart::drawer
     public:
         explicit Line(Canvas&);
 
-        void draw(const Widget&) const override;
+        void draw(const Drawable&) const override;
     };
 
 } 

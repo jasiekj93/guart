@@ -30,7 +30,7 @@ bool ButtonBox::setActiveButton(int index)
     return true;
 }
 
-void ButtonBox::processInput(const std::string_view& input)
+void ButtonBox::processKey(const std::string_view& input)
 {
     if (input.empty())
         return;

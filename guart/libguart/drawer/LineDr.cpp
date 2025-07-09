@@ -10,9 +10,9 @@ Line::Line(Canvas& canvas)
 {
 }
 
-void Line::draw(const Widget& widget) const
+void Line::draw(const Drawable& drawable) const
 {
-    auto& line = static_cast<const widget::Line&>(widget);
+    auto& line = static_cast<const widget::Line&>(drawable);
 
     auto& canvas = getCanvas();
     auto& out = canvas.getOutput();

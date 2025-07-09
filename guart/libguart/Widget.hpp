@@ -25,15 +25,6 @@ namespace guart
         using Signal = std::function<void(Widget&, std::string_view)>;
 
         Widget(const Point& position, std::string_view label = "");
-        virtual ~Widget();
-
-        void invalidate() const;
-
-        void addWidget(const std::shared_ptr<Widget>&);
-        void removeWidget(Widget* child) override;
-
-        void setDrawer(Drawer* d); 
-        void setFocusController(FocusController*); 
 
         Point getPosition() const;
         virtual Point getContentPosition() const override { return getPosition(); }
@@ -43,30 +34,21 @@ namespace guart
 
         inline void moveTo(const Point& p) { position = p; }
         inline void setParent(Parent* p) { parent = p; }
-        inline auto& getChildren() { return children; }
-        void dispose(); 
 
-        bool isFocused() const;
+        // Parent
+        void dispose() override;
 
-        virtual std::string_view getType() const = 0;
-        virtual bool isFocusable() const { return false; }
-        virtual bool isModal() const { return false; }
-
-        virtual void processInput(const std::string_view&) {}
+        // Focusable
+        bool isFocused() const override; 
 
         Signal onAction;
         Signal onFocus;
         Signal onDispose;
 
-    protected:
-
     private:
         Point position;
         std::string label;
-        std::vector<std::shared_ptr<Widget>> children;
-
-        Drawer* drawer = nullptr;
+        
         Parent* parent = nullptr;
-        FocusController* focusController = nullptr;
     };
 }

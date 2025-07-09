@@ -8,13 +8,13 @@
 
 namespace guart
 {
-    class Widget;
+    class Drawable;
 
     class Drawer
     {
     public:
         virtual ~Drawer() = default;
 
-        virtual void draw(const Widget& widget) const = 0;
+        virtual void draw(const Drawable&) const = 0;
     };
 }

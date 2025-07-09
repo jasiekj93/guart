@@ -15,6 +15,9 @@ using namespace guart;
 Screen::Screen(Output& output)
     : output(output)
 {
+    focusController = this;
+    drawer = this;
+
     drawers["Label"] = std::make_unique<drawer::Label>(*this);
     drawers["Window"] = std::make_unique<drawer::Window>(*this);
     drawers["ButtonBox"] = std::make_unique<drawer::ButtonBox>(*this);
@@ -23,31 +26,10 @@ Screen::Screen(Output& output)
     drawers["Line"] = std::make_unique<drawer::Line>(*this);
 }
 
-void Screen::addWidget(const std::shared_ptr<Widget>& widget)
-{
-    if(not widget)
-        return;
-
-    widget->setDrawer(this);
-    widget->setFocusController(this);
-    widget->setParent(this);
-    widgets.push_back(widget);
-}
-
-void Screen::removeWidget(Widget* child)
-{
-    widgets.erase(std::remove_if(widgets.begin(), widgets.end(),
-                                    [child](const std::shared_ptr<Widget>& w) { return w.get() == child; }),
-                    widgets.end());
-    
-    removeFocusableWidget(child);
-    invalidate();
-}
-
 void Screen::invalidate() const
 {
     clear();
-    for(auto& widget : widgets)
+    for(auto& widget : getChildren())
     {
         if(widget)
             widget->invalidate();
@@ -70,12 +52,12 @@ void Screen::clear() const
     output << "\e[H";  // Move cursor to home position
 }
 
-void Screen::draw(const Widget& widget) const
+void Screen::draw(const Drawable& drawable) const
 {
-    const auto& drawer = drawers.find(widget.getType());
+    const auto& drawer = drawers.find(drawable.getType());
 
     if (drawer != drawers.end())
-        drawer->second->draw(widget);
+        drawer->second->draw(drawable);
 }
 
 void Screen::resetOutput()

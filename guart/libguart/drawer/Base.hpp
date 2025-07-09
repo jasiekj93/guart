@@ -7,7 +7,7 @@
  */
 
 #include <libguart/Drawer.hpp>
-#include <libguart/Widget.hpp>
+#include <libguart/Drawable.hpp>
 #include <libguart/Canvas.hpp>
 #include <libguart/Dimensions.hpp>
 
@@ -19,8 +19,7 @@ namespace guart::drawer
         explicit Base(Canvas&);
         virtual ~Base() = default;
 
-        // Draws the widget on the screen
-        virtual void draw(const Widget&) const override = 0;
+        virtual void draw(const Drawable&) const override = 0;
 
     protected:
         void drawBorder(const Point&, const Dimensions&) const; 

@@ -28,7 +28,7 @@ ModalWindow::ModalWindow(const Point& p, const Dimensions& d,
     };
 }
 
-void ModalWindow::processInput(const std::string_view& input)
+void ModalWindow::processKey(const std::string_view& input)
 {
-    getChildren()[1]->processInput(input);
+    getChildren()[1]->processKey(input);
 }

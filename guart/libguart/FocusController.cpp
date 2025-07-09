@@ -1,4 +1,5 @@
 #include "FocusController.hpp"
+#include "Focusable.hpp"
 
 #include <algorithm>
 
@@ -6,7 +7,7 @@
 
 using namespace guart;
 
-void FocusController::addFocusableWidget(Widget* widget)
+void FocusController::addFocusable(Focusable* widget)
 {
     if(not widget)
         return;
@@ -35,7 +36,7 @@ void FocusController::addFocusableWidget(Widget* widget)
     }
 }
 
-void FocusController::removeFocusableWidget(Widget* widget)
+void FocusController::removeFocusable(Focusable* widget)
 {
     if(widget == nullptr)
         return;
@@ -79,17 +80,17 @@ bool FocusController::processInput(const std::string_view& input)
         if(focusedWidget == focusableWidgets.end())
             focusedWidget = focusableWidgets.begin();
 
-        (*oldIt)->invalidate();
-        (*focusedWidget)->invalidate();
+        (*oldIt)->update();
+        (*focusedWidget)->update();
 
     }
     else
-        (*focusedWidget)->processInput(input);
+        (*focusedWidget)->processKey(input);
 
     return true;
 }
 
-bool FocusController::isWidgetFocused(const Widget* w) const
+bool FocusController::isFocused(const Focusable* w) const
 {
     return (w == *focusedWidget);
 }

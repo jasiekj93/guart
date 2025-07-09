@@ -15,7 +15,7 @@ namespace guart::drawer
     public:
         explicit ButtonBox(Canvas& canvas);
 
-        void draw(const Widget& widget) const override;
+        void draw(const Drawable&) const override;
     };
 
 } 

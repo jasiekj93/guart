@@ -24,6 +24,6 @@ namespace guart::widget
         inline bool isModal() const override { return true; }
         inline bool isFocusable() const override { return true; }
 
-        void processInput(const std::string_view&) override;
+        void processKey(const std::string_view&) override;
     };
 }

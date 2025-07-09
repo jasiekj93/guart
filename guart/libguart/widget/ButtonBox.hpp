@@ -35,7 +35,7 @@ namespace guart::widget
         inline std::string_view getType() const override { return "ButtonBox"; }
         inline bool isFocusable() const { return true; }
 
-        void processInput(const std::string_view&) override;
+        void processKey(const std::string_view&) override;
 
     private:
         Buttons buttons;

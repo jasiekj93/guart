@@ -9,9 +9,9 @@ Label::Label(Canvas& canvas)
 {
 }
 
-void Label::draw(const Widget& widget) const
+void Label::draw(const Drawable& drawable) const
 {
-    auto& label = static_cast<const widget::Label&>(widget);
+    auto& label = static_cast<const widget::Label&>(drawable);
 
     if (label.getText().empty())
         return;

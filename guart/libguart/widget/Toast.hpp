@@ -20,7 +20,7 @@ namespace guart::widget
         inline bool isFocusable() const override { return true; }
         inline auto& getMessage() const { return message; }
 
-        void processInput(const std::string_view&) override;
+        void processKey(const std::string_view&) override;
 
     private:
         std::string message;

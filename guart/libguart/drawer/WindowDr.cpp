@@ -8,9 +8,9 @@ Window::Window(Canvas& canvas)
 {
 }
 
-void Window::draw(const Widget& widget) const
+void Window::draw(const Drawable& drawable) const
 {
-    auto& window = static_cast<const guart::widget::Window&>(widget);
+    auto& window = static_cast<const guart::widget::Window&>(drawable);
 
     drawBoldBorder(window.getPosition(), window.getDimensions());
     drawBorderTitle(window.getPosition(), window.getDimensions(), window.getTitle());

@@ -1,29 +1,34 @@
 #pragma once
 
-#include <list>
+/**
+ * @file FocusController.hpp
+ * @author Adrian Szczepanski
+ * @date 09-07-2025
+ */
 
-#include <libguart/Widget.hpp>
+#include <list>
+#include <string>
 
 namespace guart
 {
+    class Focusable;
+
     class FocusController
     {
     public:
         virtual ~FocusController() = default;
 
-        void addFocusableWidget(Widget*);
-        void removeFocusableWidget(Widget* widget);
+        void addFocusable(Focusable*);
+        void removeFocusable(Focusable* widget);
+        bool isFocused(const Focusable*) const;
         
-        bool processInput(const std::string_view&);
-        bool isWidgetFocused(const Widget*) const;
+        virtual bool processInput(const std::string_view&);
 
     protected:
         virtual void resetOutput() = 0;
 
     private:
-        //TODO vector i index zamiast iteratora (przy przenoszeniu wektora jebie się iterator)
-        //albo lista
-        std::list<Widget*>::iterator focusedWidget = focusableWidgets.end();
-        std::list<Widget*> focusableWidgets;
+        std::list<Focusable*>::iterator focusedWidget = focusableWidgets.end();
+        std::list<Focusable*> focusableWidgets;
     };
 }
