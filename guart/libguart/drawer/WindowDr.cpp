@@ -8,7 +8,7 @@ Window::Window(Canvas& canvas)
 {
 }
 
-void Window::draw(const Drawable& drawable) const
+void Window::drawWidget(const Drawable& drawable, Canvas& canvas) const
 {
     auto& window = static_cast<const guart::widget::Window&>(drawable);
 

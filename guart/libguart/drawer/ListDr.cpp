@@ -9,10 +9,9 @@ List::List(Canvas& canvas)
 {
 }
 
-void List::draw(const Drawable& drawable) const
+void List::drawWidget(const Drawable& drawable, Canvas& canvas) const
 {
     auto& list = dynamic_cast<const guart::widget::List&>(drawable);
-    auto& canvas = getCanvas();
     auto& out = canvas.getOutput();
 
     if (list.hasBorder())
@@ -49,8 +48,6 @@ void List::draw(const Drawable& drawable) const
         
         displayedItems++;
     }
-
-    out.flush();
 }
 
 void List::drawItem(const Drawable&, Output& out, std::string_view item, int index) const

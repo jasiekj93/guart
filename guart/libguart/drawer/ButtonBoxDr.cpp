@@ -9,10 +9,9 @@ ButtonBox::ButtonBox(Canvas& canvas)
 {
 }
 
-void ButtonBox::draw(const Drawable& drawable) const
+void ButtonBox::drawWidget(const Drawable& drawable, Canvas& canvas) const
 {
     auto& buttonBox = static_cast<const guart::widget::ButtonBox&>(drawable);
-    auto& canvas = getCanvas();
     auto& out = canvas.getOutput();
 
     if (buttonBox.hasBorder())
@@ -44,5 +43,4 @@ void ButtonBox::draw(const Drawable& drawable) const
         // for (int j = buttons[i].size(); j < buttonWidth - 1; ++j)
             out << ' ';
     }
-    out.flush();
 }

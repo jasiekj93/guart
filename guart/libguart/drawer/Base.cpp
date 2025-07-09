@@ -9,6 +9,21 @@ Base::Base(Canvas& canvas)
 {
 }
 
+void Base::draw(const Drawable& drawable) const
+{
+    auto& out = canvas.getOutput();
+
+    if(not drawable.isActive())
+        out << style::DIMMER; // Apply dimmer style for inactive widgets
+
+    drawWidget(drawable, canvas);
+
+    if(not drawable.isActive())
+        out << style::NORMAL; // Reset style after drawing
+
+    out.flush();
+}
+
 void Base::drawBorder(const Point& point, const Dimensions& dimensions) const
 {
     canvas.moveCursor(point);
@@ -93,7 +108,6 @@ void Base::drawScrollBar(const Point &position, const Dimensions &dimensions, in
     if(totalItems <= dimensions.height)
         return; // No scrollbar needed
 
-    auto& canvas = getCanvas();
     auto& out = canvas.getOutput();
 
     canvas.moveCursor(position + Point{dimensions.width - 1, 0});

@@ -19,17 +19,17 @@ namespace guart::drawer
         explicit Base(Canvas&);
         virtual ~Base() = default;
 
-        virtual void draw(const Drawable&) const override = 0;
+        void draw(const Drawable&) const override;
 
     protected:
+        virtual void drawWidget(const Drawable&, Canvas&) const = 0;
+
         void drawBorder(const Point&, const Dimensions&) const; 
         void drawBoldBorder(const Point&, const Dimensions&) const; 
 
         void drawBorderTitle(const Point&, const Dimensions&, std::string_view title) const; 
 
         void drawScrollBar(const Point&, const Dimensions&, int activeIndex, int totalItems) const;
-
-        inline Canvas& getCanvas() const { return canvas; }
 
     private:
         Canvas& canvas; 

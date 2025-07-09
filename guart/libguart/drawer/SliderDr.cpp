@@ -10,11 +10,9 @@ Slider::Slider(Canvas& canvas)
 {
 }
 
-void Slider::draw(const Drawable& drawable) const
+void Slider::drawWidget(const Drawable& drawable, Canvas& canvas) const
 {
     auto& slider = dynamic_cast<const widget::Slider&>(drawable);
-    
-    auto& canvas = getCanvas();
     auto& out = canvas.getOutput();
 
     if (slider.hasBorder())
@@ -60,6 +58,4 @@ void Slider::draw(const Drawable& drawable) const
             out << border::VERTICAL;
         }
     }
-
-    out.flush();
 }

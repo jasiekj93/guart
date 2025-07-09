@@ -10,18 +10,14 @@ Line::Line(Canvas& canvas)
 {
 }
 
-void Line::draw(const Drawable& drawable) const
+void Line::drawWidget(const Drawable& drawable, Canvas& canvas) const
 {
     auto& line = static_cast<const widget::Line&>(drawable);
-
-    auto& canvas = getCanvas();
     auto& out = canvas.getOutput();
 
     canvas.moveCursor(line.getPosition());
 
     for(auto i = 0; i < line.getWidth(); ++i)
         out << (line.isDouble() ? border::bold::HORIZONTAL : border::HORIZONTAL);
-
-    out.flush();
 }
 

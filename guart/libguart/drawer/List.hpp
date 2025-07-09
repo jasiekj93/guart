@@ -15,9 +15,8 @@ namespace guart::drawer
     public:
         explicit List(Canvas& canvas);
 
-        void draw(const Drawable&) const override;
-
     protected:
+        void drawWidget(const Drawable&, Canvas&) const override;
         virtual void drawItem(const Drawable&, Output&, std::string_view item, int index) const;
     };
 

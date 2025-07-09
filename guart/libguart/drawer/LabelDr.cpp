@@ -9,18 +9,16 @@ Label::Label(Canvas& canvas)
 {
 }
 
-void Label::draw(const Drawable& drawable) const
+void Label::drawWidget(const Drawable& drawable, Canvas& canvas) const
 {
     auto& label = static_cast<const widget::Label&>(drawable);
 
     if (label.getText().empty())
         return;
     
-    auto& canvas = getCanvas();
     auto& out = canvas.getOutput();
 
     canvas.moveCursor(label.getPosition());
     out << label.getText();
-    out.flush();
 }
 

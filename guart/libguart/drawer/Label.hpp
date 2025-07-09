@@ -15,7 +15,8 @@ namespace guart::drawer
     public:
         explicit Label(Canvas& canvas);
 
-        void draw(const Drawable&) const override;
+    protected:
+        void drawWidget(const Drawable&, Canvas&) const override;
     };
 
 } 

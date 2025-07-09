@@ -8,10 +8,9 @@ Toast::Toast(Canvas& canvas)
 {
 }
 
-void Toast::draw(const Drawable& drawable) const
+void Toast::drawWidget(const Drawable& drawable, Canvas& canvas) const
 {
     auto& toast = static_cast<const guart::widget::Toast&>(drawable);
-    auto& canvas = getCanvas();
     auto& out = canvas.getOutput();
 
     Dimensions::Width width = toast.getMessage().size() + 2;
@@ -20,5 +19,4 @@ void Toast::draw(const Drawable& drawable) const
     canvas.moveCursor(toast.getPosition() + Point{ 2, 1 });
     
     out << toast.getMessage();
-    out.flush();
 }

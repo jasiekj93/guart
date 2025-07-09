@@ -9,7 +9,7 @@ TextBox::TextBox(Canvas& canvas)
 {
 }
 
-void TextBox::draw(const Drawable& drawable) const
+void TextBox::drawWidget(const Drawable& drawable, Canvas& canvas) const
 {
     auto& textBox = static_cast<const widget::TextBox&>(drawable);
     auto& text = textBox.getText();
@@ -17,7 +17,6 @@ void TextBox::draw(const Drawable& drawable) const
     if (text.empty())
         return;
 
-    auto& canvas = getCanvas();
     auto& out = canvas.getOutput();
 
     auto position = textBox.getPosition();
@@ -36,5 +35,4 @@ void TextBox::draw(const Drawable& drawable) const
     }
 
     out << text.substr(prev);
-    out.flush();
 }
