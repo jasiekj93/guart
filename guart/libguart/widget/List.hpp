@@ -28,6 +28,7 @@ namespace guart::widget
         inline const Items& getItems() const { return items; }
         inline auto getDimensions() const { return dimensions; }
         inline auto getActiveIndex() const { return activeIndex; }
+        inline auto getDisplayedIndex() const { return displayedIndex; }
         inline bool hasBorder() const { return addBorder; }
 
         inline void setTitle(std::string_view l) { title = l; }
@@ -43,6 +44,7 @@ namespace guart::widget
         Items items;
         std::string title;
         int activeIndex = -1;
+        int displayedIndex = 0;
         bool addBorder;
     };
 } 

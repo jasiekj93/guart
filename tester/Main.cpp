@@ -75,7 +75,7 @@ int main(int argc, char* argv[])
 
 
     auto list = std::make_shared<widget::List>(Point{30, 6}, Dimensions{20, 5}, 
-        widget::List::Items{"Item 1", "Item 2", "Item 3"},
+        widget::List::Items{"Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10"},
         true);
 
     Widget::Signal listAction = [&screen](Widget& widget, std::string_view action) {

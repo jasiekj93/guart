@@ -23,12 +23,17 @@ void List::draw(const Drawable& drawable) const
 
     auto& items = list.getItems();
     auto position = list.getPosition() + Point {1, 1}; // Offset for border
+    auto height = list.getDimensions().height; // Adjust height for border
+    auto displayedItems = 0;
 
-    for(auto i = 0; i < items.size(); ++i)
+    for(auto i = list.getDisplayedIndex(); i < items.size(); ++i)
     {
+        if(displayedItems >= height)
+            break;
+
         auto& item = items[i];
-        auto itemPosition = Point(position.x, position.y + i);
-        
+        auto itemPosition = Point(position.x, position.y + displayedItems);
+
         canvas.moveCursor(itemPosition);
 
         if (i == list.getActiveIndex() and list.isFocused())
@@ -38,6 +43,8 @@ void List::draw(const Drawable& drawable) const
 
         if (i == list.getActiveIndex() and list.isFocused())
             out << control::REVERSE_OFF;
+        
+        displayedItems++;
     }
 
     out.flush();
