@@ -87,3 +87,32 @@ void Base::drawBorderTitle(const Point& p, const Dimensions& d, std::string_view
     out << title;
     out.flush();
 }
+
+void Base::drawScrollBar(const Point &position, const Dimensions &dimensions, int activeIndex, int totalItems) const
+{
+    if(totalItems <= dimensions.height)
+        return; // No scrollbar needed
+
+    auto& canvas = getCanvas();
+    auto& out = canvas.getOutput();
+
+    canvas.moveCursor(position + Point{dimensions.width - 1, 0});
+    out << BLACK_UP_POINTING_TRIANGLE;
+
+    auto scrollBarHeight = dimensions.height - 2; 
+    double ratio = static_cast<double>(activeIndex) / (totalItems - 1);
+    auto scrollBarPosition = static_cast<int>(ratio * (scrollBarHeight - 1));
+
+    for(auto i = 0; i < scrollBarHeight; ++i)
+    {
+        canvas.moveCursor(position + Point{dimensions.width - 1, Point::Y(i + 1)});
+
+        if(i == scrollBarPosition)
+            out << BLACK_VERTICAL_RECTANGLE; // Scrollbar indicator
+        else
+            out << border::VERTICAL; 
+    }
+
+    canvas.moveCursor(position + Point{dimensions.width - 1, dimensions.height - 1});
+    out << BLACK_DOWN_POINTING_TRIANGLE;
+}

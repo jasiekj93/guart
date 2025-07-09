@@ -9,6 +9,7 @@
 #include <libguart/drawer/TextBox.hpp>
 #include <libguart/drawer/Line.hpp>
 #include <libguart/drawer/List.hpp>
+#include <libguart/drawer/RadioList.hpp>
 #include <libguart/Key.hpp>
 
 using namespace guart;
@@ -26,6 +27,7 @@ Screen::Screen(Output& output)
     drawers["TextBox"] = std::make_unique<drawer::TextBox>(*this);
     drawers["Line"] = std::make_unique<drawer::Line>(*this);
     drawers["List"] = std::make_unique<drawer::List>(*this);
+    drawers["RadioList"] = std::make_unique<drawer::RadioList>(*this);
 }
 
 void Screen::invalidate() const

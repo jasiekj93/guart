@@ -34,10 +34,10 @@ namespace guart::widget
         inline void setTitle(std::string_view l) { title = l; }
         inline std::string_view getTitle() const { return title; }
 
-        inline std::string_view getType() const override { return "List"; }
+        inline virtual std::string_view getType() const override { return "List"; }
         inline bool isFocusable() const { return true; }
 
-        void processKey(const std::string_view&) override;
+        virtual void processKey(const std::string_view&) override;
 
     private:
         Dimensions dimensions;

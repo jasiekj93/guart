@@ -27,6 +27,8 @@ namespace guart::drawer
 
         void drawBorderTitle(const Point&, const Dimensions&, std::string_view title) const; 
 
+        void drawScrollBar(const Point&, const Dimensions&, int activeIndex, int totalItems) const;
+
         inline Canvas& getCanvas() const { return canvas; }
 
     private:

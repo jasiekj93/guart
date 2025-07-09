@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * @file List.hpp
+ * @file RadioList.hpp
  * @author Adrian Szczepanski
  * @date 09-07-2025
  */
@@ -10,10 +10,10 @@
 
 namespace guart::drawer 
 {
-    class List : public Base 
+    class RadioList : public Base 
     {
     public:
-        explicit List(Canvas& canvas);
+        explicit RadioList(Canvas& canvas);
 
         void draw(const Drawable&) const override;
     };

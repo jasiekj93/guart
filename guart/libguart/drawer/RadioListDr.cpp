@@ -1,17 +1,17 @@
-#include "List.hpp"
-#include <libguart/widget/List.hpp>
+#include "RadioList.hpp"
+#include <libguart/widget/RadioList.hpp>
 #include <libguart/Charset.hpp>
 
 using namespace guart::drawer;
 
-List::List(Canvas& canvas)
+RadioList::RadioList(Canvas& canvas)
     : Base(canvas)
 {
 }
 
-void List::draw(const Drawable& drawable) const
+void RadioList::draw(const Drawable& drawable) const
 {
-    auto& list = dynamic_cast<const guart::widget::List&>(drawable);
+    auto& list = dynamic_cast<const guart::widget::RadioList&>(drawable);
     auto& canvas = getCanvas();
     auto& out = canvas.getOutput();
 
@@ -41,6 +41,11 @@ void List::draw(const Drawable& drawable) const
 
         if (i == list.getActiveIndex() and list.isFocused())
             out << control::REVERSE_ON;
+
+        if (list.getSelectedIndex() == i)
+            out << RADIO_BUTTON_CHECKED << ' ';
+        else
+            out << RADIO_BUTTON_UNCHECKED << ' ';
 
         out << item;
 
