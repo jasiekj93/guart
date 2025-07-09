@@ -55,6 +55,10 @@ int main(int argc, char* argv[])
     buttonBox->onAction = buttonAction;
     screen.addWidget(buttonBox2);
 
+    auto slider = std::make_shared<widget::Slider>(Point{50, 18}, Dimensions{20, 12},
+        widget::Slider::Items{"0", "20", "40", "60", "80", "100"}, true);
+    screen.addWidget(slider);
+
     // auto modalWindow = std::make_shared<widget::ModalWindow>(
     //     Point{5, 5}, Dimensions{30, 10}, "This is a modal window\nAlso checking if it works\nwith multiple lines.", 
     //     widget::ButtonBox::Buttons{"OK", "Cancel"});
@@ -78,23 +82,31 @@ int main(int argc, char* argv[])
         widget::List::Items{},
         true);
 
-    for(auto i = 0; i < 20; ++i)
-    {
-        list->addItem("Item " + std::to_string(i + 1));
-    }
+    list->addItem("window");
+    list->addItem("window2");
+    list->addItem("buttonBox2");
+    list->addItem("slider");
 
-    Widget::Signal listAction = [&screen](Widget& widget, std::string_view action) {
-        auto toast = std::make_shared<guart::widget::Toast>(guart::Point{20, 20}, "List item selected: " + std::string(action));
-        screen.addWidget(toast);
+    Widget::Signal listAction = [&](Widget& widget, std::string_view action) {
+        if(action == "window")
+            window->setActive(not window->isActive());
+        else if(action == "buttonBox2")
+            buttonBox2->setActive(not buttonBox2->isActive());
+        else if(action == "window2")
+            window2->setActive(not window2->isActive());
+        else if(action == "slider")
+            slider->setActive(not slider->isActive());
+
         screen.invalidate();
     };
     list->onAction = listAction;
 
     screen.addWidget(list);
 
-    auto slider = std::make_shared<widget::Slider>(Point{50, 18}, Dimensions{20, 12},
-        widget::Slider::Items{"0", "20", "40", "60", "80", "100"}, true);
-    screen.addWidget(slider);
+    window->setActive(false);
+    window2->setActive(false);
+    buttonBox2->setActive(false);
+    slider->setActive(false);
 
     screen.invalidate();
     TerminalInput termInput;

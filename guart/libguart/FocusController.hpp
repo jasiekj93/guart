@@ -18,7 +18,7 @@ namespace guart
     public:
         virtual ~FocusController() = default;
 
-        void addFocusable(Focusable*);
+        void addFocusable(Focusable*, bool setFocus = true);
         void removeFocusable(Focusable* widget);
         bool isFocused(const Focusable*) const;
         

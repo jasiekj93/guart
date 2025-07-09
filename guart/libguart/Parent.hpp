@@ -37,6 +37,7 @@ namespace guart
         // Drawable
         virtual void invalidate() const override;
         void setDrawer(Drawer* d) override;
+        virtual void setActive(bool active) override; 
 
         virtual std::string_view getType() const override = 0;
 

@@ -7,7 +7,7 @@
 
 using namespace guart;
 
-void FocusController::addFocusable(Focusable* widget)
+void FocusController::addFocusable(Focusable* widget, bool setFocus)
 {
     if(not widget)
         return;
@@ -30,8 +30,13 @@ void FocusController::addFocusable(Focusable* widget)
         }
         else 
         {
-            focusableWidgets.push_front(widget);
-            focusedWidget = focusableWidgets.begin();
+            if(setFocus)
+            {
+                focusableWidgets.push_front(widget);
+                focusedWidget = focusableWidgets.begin();
+            }
+            else
+                focusableWidgets.insert(focusedWidget, widget);
         }
     }
 }

@@ -79,6 +79,25 @@ void Parent::setDrawer(Drawer* d)
     }
 }
 
+void Parent::setActive(bool active)
+{
+    Drawable::setActive(active);
+
+    if(isFocusable() and focusController)
+    {
+        if(active)
+            focusController->addFocusable(this, false);
+        else
+            focusController->removeFocusable(this);
+    }
+
+    for(auto& widget : children)
+    {
+        if(widget)
+            widget->setActive(active);
+    }
+}
+
 void Parent::setFocusController(FocusController* controller)
 {
     Focusable::setFocusController(controller);

@@ -23,7 +23,7 @@ namespace guart
 
         virtual std::string_view getType() const = 0;
 
-        inline void setActive(bool active) { activeFlag = active; }
+        inline virtual void setActive(bool active) { activeFlag = active; }
         inline bool isActive() const { return activeFlag; }
 
     protected:
