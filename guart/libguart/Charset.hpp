@@ -38,10 +38,11 @@ namespace guart
         static constexpr auto CROSS = "┼";
     }
 
-    namespace control
+    namespace style
     {
-        static constexpr auto REVERSE_ON = "\e[7m";
-        static constexpr auto REVERSE_OFF = "\e[m";
+        static constexpr auto REVERSE = "\e[7m";
+        static constexpr auto DIMMER = "\e[2m";
+        static constexpr auto NORMAL = "\e[m";
     }
 
     static constexpr auto CHECK_BOX_CHECKED = "☒";
@@ -53,5 +54,5 @@ namespace guart
     static constexpr auto BLACK_VERTICAL_RECTANGLE = "▮";
     static constexpr auto BLACK_UP_POINTING_TRIANGLE = "▲";
     static constexpr auto BLACK_DOWN_POINTING_TRIANGLE = "▼";
-
+    static constexpr auto BLACK_HORIZONTAL_RECTANGLE = "▬";
 }

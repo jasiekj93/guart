@@ -91,8 +91,12 @@ int main(int argc, char* argv[])
     list->onAction = listAction;
 
     screen.addWidget(list);
-    screen.invalidate();
 
+    auto slider = std::make_shared<widget::Slider>(Point{50, 18}, Dimensions{20, 12},
+        widget::Slider::Items{"0", "20", "40", "60", "80", "100"}, true);
+    screen.addWidget(slider);
+
+    screen.invalidate();
     TerminalInput termInput;
     
     if (not termInput.initialize())

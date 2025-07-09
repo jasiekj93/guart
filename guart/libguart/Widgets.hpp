@@ -15,5 +15,6 @@
 #include <libguart/widget/List.hpp>
 #include <libguart/widget/RadioList.hpp>
 #include <libguart/widget/CheckList.hpp>
+#include <libguart/widget/Slider.hpp>
 
 #include <libguart/Screen.hpp>

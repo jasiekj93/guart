@@ -40,12 +40,12 @@ void List::draw(const Drawable& drawable) const
         canvas.moveCursor(itemPosition);
 
         if (i == list.getActiveIndex() and list.isFocused())
-            out << control::REVERSE_ON;
+            out << style::REVERSE;
 
         drawItem(drawable, out, item, i);
 
         if (i == list.getActiveIndex() and list.isFocused())
-            out << control::REVERSE_OFF;
+            out << style::NORMAL;
         
         displayedItems++;
     }

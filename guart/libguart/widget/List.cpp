@@ -48,6 +48,7 @@ void List::processKey(const std::string_view& input)
             if(activeIndex < displayedIndex)
                 displayedIndex = activeIndex;
 
+            processActiveIndexChange();
             invalidate();
         }
     }
@@ -60,6 +61,7 @@ void List::processKey(const std::string_view& input)
             if(activeIndex >= dimensions.height)
                 displayedIndex = activeIndex - dimensions.height + 1;
 
+            processActiveIndexChange();
             invalidate();
         }
     }

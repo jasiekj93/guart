@@ -39,6 +39,9 @@ namespace guart::widget
 
         virtual void processKey(const std::string_view&) override;
 
+    protected:
+        inline virtual void processActiveIndexChange() {}
+
     private:
         Dimensions dimensions;
         Items items;
