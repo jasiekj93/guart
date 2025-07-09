@@ -14,6 +14,7 @@
 
 namespace guart::widget
 {
+    //TODO Window jako border
     class ButtonBox : public Widget
     {
     public:

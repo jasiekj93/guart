@@ -38,6 +38,12 @@ namespace guart
         static constexpr auto CROSS = "┼";
     }
 
+    namespace control
+    {
+        static constexpr auto REVERSE_ON = "\e[7m";
+        static constexpr auto REVERSE_OFF = "\e[m";
+    }
+
     static constexpr auto CHECK_BOX = "☑";
     static constexpr auto CHECK_BOX_UNCHECKED = "☐";
 

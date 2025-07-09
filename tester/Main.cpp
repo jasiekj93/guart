@@ -55,24 +55,37 @@ int main(int argc, char* argv[])
     buttonBox->onAction = buttonAction;
     screen.addWidget(buttonBox2);
 
-    auto modalWindow = std::make_shared<widget::ModalWindow>(
-        Point{5, 5}, Dimensions{30, 10}, "This is a modal window\nAlso checking if it works\nwith multiple lines.", 
-        widget::ButtonBox::Buttons{"OK", "Cancel"});
-    modalWindow->setTitle("Modal Window");
-    modalWindow->setLabel("modalWindow");
-    screen.addWidget(modalWindow);
+    // auto modalWindow = std::make_shared<widget::ModalWindow>(
+    //     Point{5, 5}, Dimensions{30, 10}, "This is a modal window\nAlso checking if it works\nwith multiple lines.", 
+    //     widget::ButtonBox::Buttons{"OK", "Cancel"});
+    // modalWindow->setTitle("Modal Window");
+    // modalWindow->setLabel("modalWindow");
+    // screen.addWidget(modalWindow);
 
-    Widget::Signal modalAction = [&screen](Widget& widget, std::string_view action) {
+    // Widget::Signal modalAction = [&screen](Widget& widget, std::string_view action) {
         
-        auto toast = std::make_shared<guart::widget::Toast>(guart::Point{20, 20}, "Button clicked: " + std::string(action));
+    //     auto toast = std::make_shared<guart::widget::Toast>(guart::Point{20, 20}, "Button clicked: " + std::string(action));
+    //     screen.addWidget(toast);
+    //     screen.invalidate();
+    //     toast->onDispose = [&widget](Widget& w, std::string_view) {
+    //         widget.dispose();
+    //     };
+    // };
+    // modalWindow->onAction = modalAction;
+
+
+    auto list = std::make_shared<widget::List>(Point{30, 6}, Dimensions{20, 5}, 
+        widget::List::Items{"Item 1", "Item 2", "Item 3"},
+        true);
+
+    Widget::Signal listAction = [&screen](Widget& widget, std::string_view action) {
+        auto toast = std::make_shared<guart::widget::Toast>(guart::Point{20, 20}, "List item selected: " + std::string(action));
         screen.addWidget(toast);
         screen.invalidate();
-        toast->onDispose = [&widget](Widget& w, std::string_view) {
-            widget.dispose();
-        };
     };
-    modalWindow->onAction = modalAction;
+    list->onAction = listAction;
 
+    screen.addWidget(list);
     screen.invalidate();
 
     TerminalInput termInput;

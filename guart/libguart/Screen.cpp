@@ -8,6 +8,7 @@
 #include <libguart/drawer/Toast.hpp>
 #include <libguart/drawer/TextBox.hpp>
 #include <libguart/drawer/Line.hpp>
+#include <libguart/drawer/List.hpp>
 #include <libguart/Key.hpp>
 
 using namespace guart;
@@ -24,6 +25,7 @@ Screen::Screen(Output& output)
     drawers["Toast"] = std::make_unique<drawer::Toast>(*this);
     drawers["TextBox"] = std::make_unique<drawer::TextBox>(*this);
     drawers["Line"] = std::make_unique<drawer::Line>(*this);
+    drawers["List"] = std::make_unique<drawer::List>(*this);
 }
 
 void Screen::invalidate() const
