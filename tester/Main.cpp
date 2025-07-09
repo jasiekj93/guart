@@ -74,9 +74,14 @@ int main(int argc, char* argv[])
     // modalWindow->onAction = modalAction;
 
 
-    auto list = std::make_shared<widget::List>(Point{30, 6}, Dimensions{20, 5}, 
-        widget::List::Items{"Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10"},
+    auto list = std::make_shared<widget::List>(Point{30, 6}, Dimensions{20, 10}, 
+        widget::List::Items{},
         true);
+
+    for(auto i = 0; i < 20; ++i)
+    {
+        list->addItem("Item " + std::to_string(i + 1));
+    }
 
     Widget::Signal listAction = [&screen](Widget& widget, std::string_view action) {
         auto toast = std::make_shared<guart::widget::Toast>(guart::Point{20, 20}, "List item selected: " + std::string(action));

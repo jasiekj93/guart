@@ -47,4 +47,9 @@ namespace guart
     static constexpr auto CHECK_BOX = "☑";
     static constexpr auto CHECK_BOX_UNCHECKED = "☐";
 
+    static constexpr auto WHITE_VERTICAL_RECTANGLE = "▯";
+    static constexpr auto BLACK_VERTICAL_RECTANGLE = "▮";
+    static constexpr auto BLACK_UP_POINTING_TRIANGLE = "▲";
+    static constexpr auto BLACK_DOWN_POINTING_TRIANGLE = "▼";
+
 }

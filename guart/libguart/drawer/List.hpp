@@ -16,6 +16,9 @@ namespace guart::drawer
         explicit List(Canvas& canvas);
 
         void draw(const Drawable&) const override;
+
+    protected:
+        void drawScrollBar(const Point&, const Dimensions&, int activeIndex, int totalItems) const;
     };
 
 } 
