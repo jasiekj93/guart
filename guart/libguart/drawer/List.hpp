@@ -16,6 +16,9 @@ namespace guart::drawer
         explicit List(Canvas& canvas);
 
         void draw(const Drawable&) const override;
+
+    protected:
+        virtual void drawItem(const Drawable&, Output&, std::string_view item, int index) const;
     };
 
 } 

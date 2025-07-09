@@ -6,16 +6,17 @@
  * @date 09-07-2025
  */
 
-#include <libguart/drawer/Base.hpp>
+#include <libguart/drawer/List.hpp>
 
 namespace guart::drawer 
 {
-    class RadioList : public Base 
+    class RadioList : public List 
     {
     public:
         explicit RadioList(Canvas& canvas);
 
-        void draw(const Drawable&) const override;
+    protected:
+        void drawItem(const Drawable&, Output&, std::string_view item, int index) const override;
     };
 
 } 

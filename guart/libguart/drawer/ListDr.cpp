@@ -42,7 +42,7 @@ void List::draw(const Drawable& drawable) const
         if (i == list.getActiveIndex() and list.isFocused())
             out << control::REVERSE_ON;
 
-        out << item;
+        drawItem(drawable, out, item, i);
 
         if (i == list.getActiveIndex() and list.isFocused())
             out << control::REVERSE_OFF;
@@ -51,4 +51,9 @@ void List::draw(const Drawable& drawable) const
     }
 
     out.flush();
+}
+
+void List::drawItem(const Drawable&, Output& out, std::string_view item, int index) const
+{
+    out << item;
 }
