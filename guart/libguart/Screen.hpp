@@ -41,6 +41,7 @@ namespace guart
 
         //Parent
         inline void processKey(const std::string_view& input) override {}
+        inline virtual void focusChangeCallback(bool) override { }
 
     private:
         Output& output;

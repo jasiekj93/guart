@@ -41,6 +41,22 @@ void Parent::dispose()
     }
 }
 
+void Parent::childFocusedCallback(Widget* child)
+{
+    if(not child)
+        return;
+    
+    focusChangeCallback(true);
+
+    auto it = std::find_if(children.begin(), children.end(),
+                    [child](const std::shared_ptr<Widget>& w) { return w.get() == child; });
+
+    if(it != children.end())
+        std::rotate(it, it+1, children.end()); //move to the end, so it will be first on Z axis
+
+    this->invalidate();
+}
+
 void Parent::invalidate() const
 {
     Drawable::invalidate();

@@ -30,6 +30,7 @@ namespace guart
         inline const auto& getChildren() const { return children; }
 
         virtual void dispose();
+        void childFocusedCallback(Widget* child);
 
         virtual inline Point getContentPosition() const { return Point{0, 0}; }
 
@@ -41,7 +42,7 @@ namespace guart
 
         // Focusable
         void setFocusController(FocusController* controller) override;
-        inline void update() override { invalidate(); }
+        inline virtual void focusChangeCallback(bool) override { invalidate(); }
 
     private:
         std::vector<std::shared_ptr<Widget>> children;

@@ -23,7 +23,7 @@ namespace guart
 
         virtual void processKey(const std::string_view&) {}
 
-        virtual void update() = 0;
+        virtual void focusChangeCallback(bool isFocused) = 0;
 
     protected:
         FocusController* focusController = nullptr;

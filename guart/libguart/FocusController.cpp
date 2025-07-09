@@ -29,10 +29,10 @@ void FocusController::addFocusable(Focusable* widget)
             }
         }
         else 
+        {
             focusableWidgets.push_front(widget);
-
-        if(focusableWidgets.size() == 1)
             focusedWidget = focusableWidgets.begin();
+        }
     }
 }
 
@@ -80,8 +80,8 @@ bool FocusController::processInput(const std::string_view& input)
         if(focusedWidget == focusableWidgets.end())
             focusedWidget = focusableWidgets.begin();
 
-        (*oldIt)->update();
-        (*focusedWidget)->update();
+        (*oldIt)->focusChangeCallback(false);
+        (*focusedWidget)->focusChangeCallback(true);
 
     }
     else

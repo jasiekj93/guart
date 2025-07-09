@@ -37,9 +37,8 @@ namespace guart
 
         // Parent
         void dispose() override;
-
-        // Focusable
         bool isFocused() const override; 
+        void focusChangeCallback(bool isFocused) override;
 
         Signal onAction;
         Signal onFocus;

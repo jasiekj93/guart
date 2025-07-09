@@ -38,3 +38,14 @@ bool guart::Widget::isFocused() const
     else
         return false;
 }
+
+void Widget::focusChangeCallback(bool isFocused)
+{
+    if(onFocus)
+        onFocus(*this, "");
+
+    if(parent and isFocused)
+        parent->childFocusedCallback(this);
+
+    invalidate();
+}
