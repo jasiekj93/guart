@@ -22,7 +22,10 @@ void FocusController::addFocusableWidget(Widget* widget)
                 focusedWidget = focusableWidgets.begin();
             }
             else
+            {
                 focusableWidgets.insert(focusedWidget, widget);
+                focusedWidget--;
+            }
         }
         else 
             focusableWidgets.push_front(widget);
@@ -46,14 +49,13 @@ void FocusController::removeFocusableWidget(Widget* widget)
     {
         if(focusableWidgets.size() == 1)
             focusedWidget = focusableWidgets.end();
-        // else if (focusedWidget == focusableWidgets.begin())
-        //     focusedWidget++;
-        // else
-        //     focusedWidget--;
+        else if (focusedWidget == std::prev(focusableWidgets.end()))
+            focusedWidget--;
+        else
+            focusedWidget++;
     } 
 
     focusableWidgets.erase(it);
-    focusableWidgets.resize(focusableWidgets.size());
 }
 
 bool FocusController::processInput(const std::string_view& input)

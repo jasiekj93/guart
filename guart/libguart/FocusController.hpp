@@ -1,6 +1,6 @@
 #pragma once
 
-#include <deque>
+#include <list>
 
 #include <libguart/Widget.hpp>
 
@@ -21,7 +21,9 @@ namespace guart
         virtual void resetOutput() = 0;
 
     private:
-        std::deque<Widget*>::iterator focusedWidget = focusableWidgets.end();
-        std::deque<Widget*> focusableWidgets;
+        //TODO vector i index zamiast iteratora (przy przenoszeniu wektora jebie się iterator)
+        //albo lista
+        std::list<Widget*>::iterator focusedWidget = focusableWidgets.end();
+        std::list<Widget*> focusableWidgets;
     };
 }
