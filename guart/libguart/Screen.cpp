@@ -13,6 +13,7 @@
 #include <libguart/drawer/CheckList.hpp>
 #include <libguart/drawer/Slider.hpp>
 #include <libguart/drawer/TextField.hpp>
+#include <libguart/drawer/Calendar.hpp>
 #include <libguart/Key.hpp>
 
 using namespace guart;
@@ -34,6 +35,7 @@ Screen::Screen(Output& output)
     drawers["CheckList"] = std::make_unique<drawer::CheckList>(*this);
     drawers["Slider"] = std::make_unique<drawer::Slider>(*this);
     drawers["TextField"] = std::make_unique<drawer::TextField>(*this);
+    drawers["Calendar"] = std::make_unique<drawer::Calendar>(*this);
 }
 
 void Screen::invalidate() const

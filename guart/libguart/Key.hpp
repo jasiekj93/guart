@@ -44,4 +44,8 @@ namespace guart::key
     static constexpr auto CTRL_G = "\x07";        // Ctrl+G (Bell)
     static constexpr auto CTRL_J = "\x0a";        // Ctrl+J (New line, same as Enter)
     static constexpr auto CTRL_M = "\x0d";        // Ctrl+M (Carriage return, same as Enter)
+    static constexpr auto SHIFT_UP = "\x1b[1;2A";    // Shift + Up arrow key
+    static constexpr auto SHIFT_DOWN = "\x1b[1;2B";  // Shift + Down arrow key
+    static constexpr auto SHIFT_RIGHT = "\x1b[1;2C"; // Shift + Right arrow key
+    static constexpr auto SHIFT_LEFT = "\x1b[1;2D";  // Shift + Left arrow key
 }

@@ -117,6 +117,15 @@ int main(int argc, char* argv[])
     };
     screen.addWidget(textField);
 
+    auto calendar = std::make_shared<widget::Calendar>(Point{75, 5}, Date{2025, 6, 30});
+    calendar->setLabel("calendar");
+    calendar->onAction = [&screen](Widget& widget, std::string_view dateStr) {
+        auto toast = std::make_shared<guart::widget::Toast>(guart::Point{20, 20}, "Selected date: " + std::string(dateStr));
+        screen.addWidget(toast);
+        screen.invalidate();
+    };
+    screen.addWidget(calendar);
+
     screen.invalidate();
     TerminalInput termInput;
     

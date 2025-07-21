@@ -24,16 +24,13 @@ void TextField::drawWidget(const Drawable& drawable, Canvas& canvas) const
     canvas.moveCursor(textField.getPosition() + Point{1, 1}); 
     out << textField.getText();
 
-    if(textField.getText().size() < textField.getLength())
+    if(textField.getText().size() < textField.getLength() and
+       textField.isFocused())
     {
-        if(textField.isFocused())
-        {
-            out << style::BLINK; // Use BLINK style for empty space
-            out << DARK_SHADE;
-            out << style::BLINK_OFF;
-        }
+        out << style::BLINK; 
+        out << DARK_SHADE;
+        out << style::BLINK_OFF;
     }
-
 
     for(size_t i = textField.getText().size() + 1; i < textField.getLength(); i++)
         out << ' '; // Fill remaining space with spaces
