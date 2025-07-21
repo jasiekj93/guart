@@ -108,6 +108,15 @@ int main(int argc, char* argv[])
     buttonBox2->setActive(false);
     slider->setActive(false);
 
+    auto textField = std::make_shared<widget::TextField>(Point{5, 30}, 20, "Type here...");
+    textField->setLabel("textField");
+    textField->onAction = [&screen](Widget& widget, std::string_view text) {
+        auto toast = std::make_shared<guart::widget::Toast>(guart::Point{20, 20}, "Text entered: " + std::string(text));
+        screen.addWidget(toast);
+        screen.invalidate();
+    };
+    screen.addWidget(textField);
+
     screen.invalidate();
     TerminalInput termInput;
     

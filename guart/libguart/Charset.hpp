@@ -43,6 +43,8 @@ namespace guart
         static constexpr auto REVERSE = "\e[7m";
         static constexpr auto DIMMER = "\e[2m";
         static constexpr auto NORMAL = "\e[m";
+        static constexpr auto BLINK = "\e[5m";
+        static constexpr auto BLINK_OFF = "\e[25m";
     }
 
     static constexpr auto CHECK_BOX_CHECKED = "☒";
@@ -51,8 +53,9 @@ namespace guart
     static constexpr auto RADIO_BUTTON_UNCHECKED = "○";
 
     static constexpr auto WHITE_VERTICAL_RECTANGLE = "▯";
-    static constexpr auto BLACK_VERTICAL_RECTANGLE = "▮";
+    static constexpr auto BLACK_VERTICAL_RECTANGLE = "█";
     static constexpr auto BLACK_UP_POINTING_TRIANGLE = "▲";
     static constexpr auto BLACK_DOWN_POINTING_TRIANGLE = "▼";
     static constexpr auto BLACK_HORIZONTAL_RECTANGLE = "▬";
+    static constexpr auto DARK_SHADE = "▓";
 }
