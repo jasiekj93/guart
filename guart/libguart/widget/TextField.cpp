@@ -4,10 +4,11 @@
 using namespace guart;
 using namespace guart::widget;
 
-TextField::TextField(const Point& position, size_t len, const std::string_view& text)
+TextField::TextField(const Point& position, size_t len, const std::string_view& text, bool border)
     : Widget(position)
     , text(text)
     , length(len)
+    , addBorder(border)
 {
 }
 
