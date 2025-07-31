@@ -11,7 +11,6 @@
 #include "CliOutput.hpp"
 #include "Serial.hpp"
 #include "TerminalInput.hpp"
-#include "ButtonObserver.hpp"
 
 using namespace guart;
 
