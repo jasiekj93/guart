@@ -12,7 +12,7 @@ Slider::Slider(Canvas& canvas)
 
 void Slider::drawWidget(const Drawable& drawable, Canvas& canvas) const
 {
-    auto& slider = dynamic_cast<const widget::Slider&>(drawable);
+    auto& slider = static_cast<const widget::Slider&>(drawable);
     auto& out = canvas.getOutput();
 
     if (slider.hasBorder())
