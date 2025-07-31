@@ -34,6 +34,7 @@ tester \
 
 # Project libraries
 library_names = \
+guart \
 
 # optimalization flags
 # export debug_optimalization := 

@@ -11,7 +11,7 @@ List::List(Canvas& canvas)
 
 void List::drawWidget(const Drawable& drawable, Canvas& canvas) const
 {
-    auto& list = dynamic_cast<const guart::widget::List&>(drawable);
+    auto& list = static_cast<const guart::widget::List&>(drawable);
     auto& out = canvas.getOutput();
 
     if (list.hasBorder())
