@@ -45,8 +45,11 @@ int main(int argc, char* argv[])
     window2->setTitle("Second Window");
     buttonBox2->setTitle("Button Box 2");
 
-    Widget::Signal buttonAction = [&screen](Widget& widget, std::string_view action) {
-        auto toast = std::make_shared<guart::widget::Toast>(guart::Point{20, 20}, "Button clicked: " + std::string(action));
+    Widget::Signal buttonAction = [&screen](Widget& widget, etl::string_view action) {
+        guart::widget::Toast::Message message = "Button clicked: ";
+        message += action;
+
+        auto toast = std::make_shared<guart::widget::Toast>(guart::Point{20, 20}, message);
         screen.addWidget(toast);
         screen.invalidate();
     };
@@ -87,7 +90,7 @@ int main(int argc, char* argv[])
     list->addItem("buttonBox2");
     list->addItem("slider");
 
-    Widget::Signal listAction = [&](Widget& widget, std::string_view action) {
+    Widget::Signal listAction = [&](Widget& widget, etl::string_view action) {
         if(action == "window")
             window->setActive(not window->isActive());
         else if(action == "buttonBox2")
@@ -110,8 +113,11 @@ int main(int argc, char* argv[])
 
     auto textField = std::make_shared<widget::TextField>(Point{5, 30}, 20, "Type here...");
     textField->setLabel("textField");
-    textField->onAction = [&screen](Widget& widget, std::string_view text) {
-        auto toast = std::make_shared<guart::widget::Toast>(guart::Point{20, 20}, "Text entered: " + std::string(text));
+    textField->onAction = [&screen](Widget& widget, etl::string_view text) {
+        guart::widget::Toast::Message message = "Text entered: ";
+        message += text;
+
+        auto toast = std::make_shared<guart::widget::Toast>(guart::Point{20, 20}, message);
         screen.addWidget(toast);
         screen.invalidate();
     };
@@ -119,8 +125,11 @@ int main(int argc, char* argv[])
 
     auto calendar = std::make_shared<widget::Calendar>(Point{75, 5}, Date{2025, 6, 30});
     calendar->setLabel("calendar");
-    calendar->onAction = [&screen](Widget& widget, std::string_view dateStr) {
-        auto toast = std::make_shared<guart::widget::Toast>(guart::Point{20, 20}, "Selected date: " + std::string(dateStr));
+    calendar->onAction = [&screen](Widget& widget, etl::string_view dateStr) {
+        guart::widget::Toast::Message message = "Selected date: ";
+        message += dateStr;
+
+        auto toast = std::make_shared<guart::widget::Toast>(guart::Point{20, 20}, message);
         screen.addWidget(toast);
         screen.invalidate();
     };
@@ -139,7 +148,7 @@ int main(int argc, char* argv[])
     {
         std::string key = termInput.getSpecialKey();
 
-        if(not screen.processInput(key))
+        if(not screen.processInput(key.data()))
             break; // Exit the application
     }
 

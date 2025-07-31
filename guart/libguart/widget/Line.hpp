@@ -16,7 +16,7 @@ namespace guart::widget
     public:
         Line(const Point&, Dimensions::Width, bool isDouble = false);
 
-        inline std::string_view getType() const override { return "Line"; }
+        inline etl::string_view getType() const override { return "Line"; }
         inline auto getWidth() const { return width; }
         inline bool isDouble() const { return isDoubleLine; }
 

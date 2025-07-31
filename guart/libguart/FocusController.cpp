@@ -64,7 +64,7 @@ void FocusController::removeFocusable(Focusable* widget)
     focusableWidgets.erase(it);
 }
 
-bool FocusController::processInput(const std::string_view& input)
+bool FocusController::processInput(const etl::string_view& input)
 {
     if (input.empty() or focusableWidgets.empty())
         return true;

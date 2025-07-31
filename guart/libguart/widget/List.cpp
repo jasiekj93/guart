@@ -12,9 +12,9 @@ List::List(const Point& p, const Dimensions& d, const Items& items, bool addBord
     setItems(items);
 }
 
-void List::addItem(std::string_view item)
+void List::addItem(etl::string_view item)
 {
-    items.push_back(std::string(item));
+    items.push_back(Item(item));
 
     if(items.size() == 1)
         activeIndex = 0;
@@ -34,7 +34,7 @@ void List::setActiveIndex(int index)
         activeIndex = index;
 }
 
-void List::processKey(const std::string_view& input)
+void List::processKey(const etl::string_view& input)
 {
     if(input.empty())
         return;

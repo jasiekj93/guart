@@ -16,7 +16,7 @@ namespace guart::drawer
         explicit RadioList(Canvas& canvas);
 
     protected:
-        void drawItem(const Drawable&, Output&, std::string_view item, int index) const override;
+        void drawItem(const Drawable&, Output&, etl::string_view item, int index) const override;
     };
 
 } 

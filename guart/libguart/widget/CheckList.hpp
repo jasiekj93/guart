@@ -6,8 +6,8 @@
  * @date 09-07-2025
  */
 
-#include <string>
-#include <vector>
+#include <etl/string.h>
+#include <etl/vector.h>
 
 #include <libguart/widget/List.hpp>
 #include <libguart/Dimensions.hpp>
@@ -19,14 +19,14 @@ namespace guart::widget
     public:
         CheckList(const Point&, const Dimensions&, const Items& items = {}, bool addBorder = false);
 
-        void processKey(const std::string_view&) override;
+        void processKey(const etl::string_view&) override;
 
         Items getSelectedItems() const;
         inline auto& getSelectedIndexes() const { return selectedIndexes; }
 
-        inline virtual std::string_view getType() const override { return "CheckList"; }
+        inline virtual etl::string_view getType() const override { return "CheckList"; }
 
     private:
-        std::vector<int> selectedIndexes; 
+        etl::vector<int, ITEM_LIMIT> selectedIndexes;
     };
 } 

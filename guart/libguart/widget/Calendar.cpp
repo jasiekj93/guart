@@ -10,7 +10,7 @@ Calendar::Calendar(const Point &position, const Date& date)
 {
 }
 
-void Calendar::processKey(const std::string_view& input)
+void Calendar::processKey(const etl::string_view& input)
 {
     if(input.empty())
         return;

@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+#include <etl/to_string.h>
+
 #include <libguart/drawer/Label.hpp>
 #include <libguart/drawer/Window.hpp>
 #include <libguart/drawer/ButtonBox.hpp>
@@ -50,7 +52,13 @@ void Screen::invalidate() const
 
 void Screen::moveCursor(const Point& p) const
 {
-    std::string cursorPosition = "\e[" + std::to_string(p.y) + ";" + std::to_string(p.x) + "H";
+    // etl::string<10> cursorPosition = "\e[" + etl::to_string<>(p.y) + ";" + std::to_string(p.x) + "H";
+    etl::string<10> cursorPosition = "\e[";
+    etl::to_string<Point::Y>(p.y, cursorPosition, true);
+    cursorPosition += ";";
+    etl::to_string<Point::X>(p.x, cursorPosition, true);
+    cursorPosition += "H";
+
     output << "\e[H"; 
     output.flush();
     output << cursorPosition;

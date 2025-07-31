@@ -6,7 +6,7 @@
  * @date 09-07-2025
  */
 
-#include <string>
+#include <etl/string.h>
 
 #include <libguart/Drawer.hpp>
 
@@ -21,7 +21,7 @@ namespace guart
 
         virtual inline void setDrawer(Drawer* d) { drawer = d; }
 
-        virtual std::string_view getType() const = 0;
+        virtual etl::string_view getType() const = 0;
 
         inline virtual void setActive(bool active) { activeFlag = active; }
         inline bool isActive() const { return activeFlag; }

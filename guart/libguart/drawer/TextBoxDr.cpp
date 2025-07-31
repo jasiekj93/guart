@@ -22,10 +22,10 @@ void TextBox::drawWidget(const Drawable& drawable, Canvas& canvas) const
     auto position = textBox.getPosition();
     canvas.moveCursor(position);
 
-    std::string::size_type pos = 0;
-    std::string::size_type prev = 0;
+    etl::istring::size_type pos = 0;
+    etl::istring::size_type prev = 0;
 
-    while ((pos = text.find('\n', prev)) != std::string::npos)
+    while ((pos = text.find('\n', prev)) != etl::istring::npos)
     {
         out << text.substr(prev, pos - prev);
         prev = pos + 1; 

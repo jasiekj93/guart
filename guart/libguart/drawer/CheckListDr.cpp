@@ -9,7 +9,7 @@ CheckList::CheckList(Canvas& canvas)
 {
 }
 
-void CheckList::drawItem(const Drawable& drawable, Output& out, std::string_view item, int index) const
+void CheckList::drawItem(const Drawable& drawable, Output& out, etl::string_view item, int index) const
 {
     auto& list = dynamic_cast<const guart::widget::CheckList&>(drawable);
     auto& selectedIndexes = list.getSelectedIndexes();

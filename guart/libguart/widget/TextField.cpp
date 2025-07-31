@@ -4,7 +4,7 @@
 using namespace guart;
 using namespace guart::widget;
 
-TextField::TextField(const Point& position, size_t len, const std::string_view& text, bool border)
+TextField::TextField(const Point& position, size_t len, const etl::string_view& text, bool border)
     : Widget(position)
     , text(text)
     , length(len)
@@ -12,7 +12,7 @@ TextField::TextField(const Point& position, size_t len, const std::string_view& 
 {
 }
 
-void TextField::processKey(const std::string_view& input)
+void TextField::processKey(const etl::string_view& input)
 {
     if(input.empty())
         return; 

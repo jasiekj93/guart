@@ -1,4 +1,7 @@
 #include "Calendar.hpp"
+
+#include <etl/to_string.h>
+
 #include <libguart/widget/Calendar.hpp>
 #include <libguart/Charset.hpp>
 
@@ -17,9 +20,12 @@ void Calendar::drawWidget(const Drawable& drawable, Canvas& canvas) const
 
     drawBorder(calendar.getPosition(), Dimensions{ 29, 15 }); 
 
+    Date::String dateString = getMonthName(calendar.getDate().getMonth()); 
+    dateString += " ";
+    etl::to_string(calendar.getDate().getYear(), dateString, true); 
+
     canvas.moveCursor(calendar.getPosition() + Point{ 2, 2 }); 
-    out << getMonthName(calendar.getDate().getMonth()) << " " 
-        << std::to_string(calendar.getDate().getYear());
+    out << dateString;
 
     canvas.moveCursor(calendar.getPosition() + Point{ 2, 3 }); 
     out << "Mon Tue Wed Thu Fri Sat Sun";
@@ -36,8 +42,10 @@ void Calendar::drawWidget(const Drawable& drawable, Canvas& canvas) const
         if(i == calendar.getDate().getDay() and calendar.isFocused())
             out << style::REVERSE; // Highlight current day
 
+        etl::string<3> dayString;
+        
         out << (i < 10 ? " " : "");
-        out << std::to_string(i); 
+        out << etl::to_string(i, dayString); 
         out.flush();
 
         if(i == calendar.getDate().getDay() and calendar.isFocused())

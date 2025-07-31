@@ -6,7 +6,11 @@
  * @date 21-07-2025
  */
 
-#include <string>
+#ifndef GUART_DATE_DATESTRING_LIMIT
+#define GUART_DATE_DATESTRING_LIMIT 10
+#endif
+
+#include <etl/string.h>
 
 namespace guart
 {
@@ -29,13 +33,16 @@ namespace guart
     class Date
     {
     public:
+        static constexpr size_t STRING_LIMIT = GUART_DATE_DATESTRING_LIMIT;
+        using String = etl::string<STRING_LIMIT>;
+
         static const Date DEFAULT_DATE; 
 
         Date();
         Date(Year);
         Date(Year, Month);
         Date(Year, Month, Day);
-        Date(std::string_view);
+        Date(etl::string_view);
 
         inline Year getYear() const { return year; }
         inline Month getMonth() const { return month; }
@@ -45,8 +52,8 @@ namespace guart
         Date& operator-=(const DateSpan&);
         bool operator==(const Date&) const;
 
-        std::string toString() const;
-        
+        String toString() const;
+
     protected:
         void normalizeDate();
         void normalizeDay();
@@ -61,5 +68,5 @@ namespace guart
     bool isLeapYear(Year);
     int getWeekday(const Date& date);
     int getDaysInMonth(Month, Year);
-    std::string getMonthName(Month month);
+    Date::String getMonthName(Month month);
 }

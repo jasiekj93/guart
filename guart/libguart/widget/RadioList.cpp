@@ -9,7 +9,7 @@ RadioList::RadioList(const Point& p, const Dimensions& d, const Items &items, bo
 {
 }
 
-void RadioList::processKey(const std::string_view &input)
+void RadioList::processKey(const etl::string_view &input)
 {
     if(input.empty())
         return;
@@ -29,10 +29,10 @@ void RadioList::processKey(const std::string_view &input)
     }
 }
 
-std::string_view guart::widget::RadioList::getSelectedItem() const
+etl::string_view guart::widget::RadioList::getSelectedItem() const
 {
     if(selectedIndex == -1)
-        return std::string_view();
+        return etl::string_view();
     else
         return getItems()[selectedIndex];
 }

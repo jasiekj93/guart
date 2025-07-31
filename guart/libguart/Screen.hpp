@@ -6,9 +6,13 @@
  * @date 01-07-2025
  */
 
+#ifndef GUART_SCREEN_DRAWERS_LIMIT
+#define GUART_SCREEN_DRAWERS_LIMIT 32
+#endif
+
 #include <memory>
-#include <vector>
-#include <map>
+
+#include <etl/map.h>
 
 #include <libguart/Output.hpp>
 #include <libguart/Canvas.hpp>
@@ -21,11 +25,13 @@ namespace guart
     class Screen : public Canvas, public Drawer, public FocusController, public Parent
     {
     public:
+        static constexpr size_t DRAWERS_LIMIT = GUART_SCREEN_DRAWERS_LIMIT;
+
         explicit Screen(Output&); 
 
         //Parent
         void invalidate() const override;
-        inline std::string_view getType() const override { return "Screen"; }
+        inline etl::string_view getType() const override { return "Screen"; }
 
         //Canvas
         void moveCursor(const Point&) const override;
@@ -40,11 +46,11 @@ namespace guart
         void resetOutput() override;
 
         //Parent
-        inline void processKey(const std::string_view& input) override {}
+        inline void processKey(const etl::string_view& input) override {}
         inline virtual void focusChangeCallback(bool) override { }
 
     private:
         Output& output;
-        std::map<std::string_view, std::unique_ptr<Drawer>> drawers;
+        etl::map<etl::string_view, std::unique_ptr<Drawer>, DRAWERS_LIMIT> drawers;
     };
 }

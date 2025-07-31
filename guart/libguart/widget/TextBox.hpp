@@ -13,11 +13,11 @@ namespace guart::widget
     class TextBox : public Label
     {
     public:
-        TextBox(const Point& position, const std::string_view& text = "")
+        TextBox(const Point& position, const etl::string_view& text = "")
             : Label(position, text)
         {
         }
 
-        inline std::string_view getType() const override { return "TextBox"; }
+        inline etl::string_view getType() const override { return "TextBox"; }
     };
 } 

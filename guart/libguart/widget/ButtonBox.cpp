@@ -14,7 +14,7 @@ ButtonBox::ButtonBox(const Point& p, const Dimensions& d, const Buttons& buttons
         activeIndex = 0; 
 }
 
-void ButtonBox::addButton(const std::string_view &button)
+void ButtonBox::addButton(const etl::string_view &button)
 {
     buttons.push_back(button);
 
@@ -30,7 +30,7 @@ bool ButtonBox::setActiveButton(int index)
     return true;
 }
 
-void ButtonBox::processKey(const std::string_view& input)
+void ButtonBox::processKey(const etl::string_view& input)
 {
     if (input.empty())
         return;

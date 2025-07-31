@@ -90,7 +90,7 @@ void Base::drawBoldBorder(const Point& point, const Dimensions& dimensions) cons
     out.flush();
 }
 
-void Base::drawBorderTitle(const Point& p, const Dimensions& d, std::string_view title) const
+void Base::drawBorderTitle(const Point& p, const Dimensions& d, etl::string_view title) const
 {
     if(title.empty())
         return;

@@ -1,5 +1,9 @@
 #include "Date.hpp"
 
+#include <charconv>
+
+#include <etl/to_string.h>
+
 using namespace guart;
 
 const Date Date::DEFAULT_DATE = Date(1970, 1, 1); 
@@ -33,7 +37,7 @@ Date::Date(Year y, Month m, Day d)
     normalizeDate();
 }
 
-Date::Date(std::string_view str)
+Date::Date(etl::string_view str)
 {
     if(str.size() != 10 || str[4] != '-' || str[7] != '-')
     {
@@ -43,9 +47,9 @@ Date::Date(std::string_view str)
         return;
     }
 
-    year = std::stoi(std::string(str.substr(0, 4)));
-    month = std::stoi(std::string(str.substr(5, 2)));
-    day = std::stoi(std::string(str.substr(8, 2)));
+    std::from_chars(str.data(), str.data() + 4, year);
+    std::from_chars(str.data() + 5, str.data() + 7, month);
+    std::from_chars(str.data() + 8, str.data() + 10, day);
 
     normalizeDate();
 }
@@ -77,11 +81,20 @@ bool guart::Date::operator==(const Date& other) const
         day == other.day);
 }
 
-std::string Date::toString() const
+Date::String Date::toString() const
 {
-    return std::to_string(year) + "-" +
-           (month < 10 ? "0" : "") + std::to_string(month) + "-" +
-           (day < 10 ? "0" : "") + std::to_string(day);
+    String result;
+
+    etl::format_spec format;
+    format.hex().width(2).fill('0'); 
+
+    etl::to_string(year, result, false);
+    result += '-';
+    etl::to_string(month, result, format, true);
+    result += '-';
+    etl::to_string(day, result, format, true);
+
+    return result;
 }
 
 void Date::normalizeDate()
@@ -193,9 +206,9 @@ int guart::getDaysInMonth(Month month, Year year)
     return 31;
 }
 
-std::string guart::getMonthName(Month month)
+Date::String guart::getMonthName(Month month)
 {
-    static const std::string monthNames[] = {
+    static const Date::String monthNames[] = {
         "Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     };

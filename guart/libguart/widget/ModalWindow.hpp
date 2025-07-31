@@ -17,13 +17,13 @@ namespace guart::widget
     {
     public:
         ModalWindow(const Point&, const Dimensions&, 
-            std::string_view message,
+            etl::string_view message,
             const ButtonBox::Buttons& buttons);
 
-        inline std::string_view getType() const override { return "Window"; }
+        inline etl::string_view getType() const override { return "Window"; }
         inline bool isModal() const override { return true; }
         inline bool isFocusable() const override { return true; }
 
-        void processKey(const std::string_view&) override;
+        void processKey(const etl::string_view&) override;
     };
 }

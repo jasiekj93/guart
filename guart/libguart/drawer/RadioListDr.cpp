@@ -9,9 +9,9 @@ RadioList::RadioList(Canvas& canvas)
 {
 }
 
-void RadioList::drawItem(const Drawable& drawable, Output& out, std::string_view item, int index) const
+void RadioList::drawItem(const Drawable& drawable, Output& out, etl::string_view item, int index) const
 {
-    auto& list = dynamic_cast<const guart::widget::RadioList&>(drawable);
+    auto& list = static_cast<const guart::widget::RadioList&>(drawable);
 
     if (list.getSelectedIndex() == index)
             out << RADIO_BUTTON_CHECKED << ' ';

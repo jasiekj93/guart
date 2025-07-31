@@ -6,8 +6,16 @@
  * @date 01-07-2025
  */
 
-#include <string>
-#include <vector>
+#ifndef GUART_WIDGET_BUTTONBOX_TITLE_LIMIT
+#define GUART_WIDGET_BUTTONBOX_TITLE_LIMIT 16
+#endif 
+
+#ifndef GUART_WIDGET_BUTTONBOX_BUTTONS_LIMIT
+#define GUART_WIDGET_BUTTONBOX_BUTTONS_LIMIT 8
+#endif
+
+#include <etl/vector.h>
+#include <etl/string.h>
 
 #include <libguart/Widget.hpp>
 #include <libguart/Dimensions.hpp>
@@ -18,11 +26,14 @@ namespace guart::widget
     class ButtonBox : public Widget
     {
     public:
-        using Buttons = std::vector<std::string_view>;
+        static constexpr size_t TITLE_LIMIT = GUART_WIDGET_BUTTONBOX_TITLE_LIMIT;
+        static constexpr size_t BUTTONS_LIMIT = GUART_WIDGET_BUTTONBOX_BUTTONS_LIMIT;
+
+        using Buttons = etl::vector<etl::string_view, BUTTONS_LIMIT>;
 
         ButtonBox(const Point&, const Dimensions&, const Buttons& buttons, bool addBorder = true);
 
-        void addButton(const std::string_view& button);
+        void addButton(const etl::string_view& button);
         bool setActiveButton(int index);
 
         inline auto& getDimensions() const { return dimensions; }
@@ -30,17 +41,17 @@ namespace guart::widget
         inline auto getButtons() const { return buttons; }
         inline bool hasBorder() const { return addBorder; }
 
-        inline void setTitle(std::string_view l) { title = l; }
-        inline std::string_view getTitle() const { return title; }
+        inline void setTitle(etl::string_view l) { title = l; }
+        inline etl::string_view getTitle() const { return title; }
 
-        inline std::string_view getType() const override { return "ButtonBox"; }
+        inline etl::string_view getType() const override { return "ButtonBox"; }
         inline bool isFocusable() const { return true; }
 
-        void processKey(const std::string_view&) override;
+        void processKey(const etl::string_view&) override;
 
     private:
         Buttons buttons;
-        std::string title;
+        etl::string<TITLE_LIMIT> title;
         int activeIndex = -1;
         Dimensions dimensions;
         bool addBorder;

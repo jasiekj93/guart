@@ -17,7 +17,7 @@ namespace guart::drawer
 
     protected:
         void drawWidget(const Drawable&, Canvas&) const override;
-        virtual void drawItem(const Drawable&, Output&, std::string_view item, int index) const;
+        virtual void drawItem(const Drawable&, Output&, etl::string_view item, int index) const;
     };
 
 } 

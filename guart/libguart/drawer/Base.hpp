@@ -27,7 +27,7 @@ namespace guart::drawer
         void drawBorder(const Point&, const Dimensions&) const; 
         void drawBoldBorder(const Point&, const Dimensions&) const; 
 
-        void drawBorderTitle(const Point&, const Dimensions&, std::string_view title) const; 
+        void drawBorderTitle(const Point&, const Dimensions&, etl::string_view title) const; 
 
         void drawScrollBar(const Point&, const Dimensions&, int activeIndex, int totalItems) const;
 

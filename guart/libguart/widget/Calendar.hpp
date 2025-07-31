@@ -13,10 +13,10 @@ namespace guart::widget
         inline auto getDate() const { return date; }
         inline void setDate(const Date& d) { date = d; }
 
-        inline std::string_view getType() const override { return "Calendar"; }
+        inline etl::string_view getType() const override { return "Calendar"; }
         inline bool isFocusable() const override { return true; }
 
-        void processKey(const std::string_view& input) override;
+        void processKey(const etl::string_view& input) override;
 
     private:
         Date date;

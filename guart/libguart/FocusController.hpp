@@ -6,8 +6,13 @@
  * @date 09-07-2025
  */
 
-#include <list>
-#include <string>
+#ifndef GUART_FOCUS_CONTROLLER_LIMIT
+#define GUART_FOCUS_CONTROLLER_LIMIT 50
+#endif
+
+#include <etl/list.h>
+
+#include <etl/string.h>
 
 namespace guart
 {
@@ -16,19 +21,21 @@ namespace guart
     class FocusController
     {
     public:
+        static constexpr size_t FOCUSABLE_LIMIT = GUART_FOCUS_CONTROLLER_LIMIT;
+
         virtual ~FocusController() = default;
 
         void addFocusable(Focusable*, bool setFocus = true);
         void removeFocusable(Focusable* widget);
         bool isFocused(const Focusable*) const;
         
-        virtual bool processInput(const std::string_view&);
+        virtual bool processInput(const etl::string_view&);
 
     protected:
         virtual void resetOutput() = 0;
 
     private:
-        std::list<Focusable*>::iterator focusedWidget = focusableWidgets.end();
-        std::list<Focusable*> focusableWidgets;
+        etl::list<Focusable*, FOCUSABLE_LIMIT>::iterator focusedWidget = focusableWidgets.end();
+        etl::list<Focusable*, FOCUSABLE_LIMIT> focusableWidgets;
     };
 }

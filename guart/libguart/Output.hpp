@@ -6,7 +6,7 @@
  * @date 01-07-2025
  */
 
-#include <string>
+#include <etl/string.h>
 
 namespace guart
 {
@@ -15,7 +15,7 @@ namespace guart
     public:
         virtual ~Output() = default;
 
-        virtual Output& operator<<(const std::string_view) = 0;
+        virtual Output& operator<<(const etl::string_view) = 0;
         virtual Output& operator<<(char) = 0;
 
         virtual void flush() {}

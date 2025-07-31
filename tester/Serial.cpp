@@ -87,7 +87,7 @@ Output& Serial::operator<<(char c)
     return *this;
 }
 
-Output& Serial::operator<<(const std::string_view data)
+Output& Serial::operator<<(const etl::string_view data)
 {
     ::write(handle, data.data(), data.size());
     // tcdrain(handle);   //wait to be sent

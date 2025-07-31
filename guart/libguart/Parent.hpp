@@ -6,9 +6,14 @@
  * @date 08-07-2025
  */
 
+#ifndef GUART_PARENT_CHILDREN_LIMIT
+#define GUART_PARENT_CHILDREN_LIMIT 10
+#endif
+
 #include <memory>
-#include <vector>
-#include <string_view>
+
+#include <etl/vector.h>
+#include <etl/string.h>
 
 #include <libguart/Point.hpp>
 #include <libguart/Drawable.hpp>
@@ -21,6 +26,8 @@ namespace guart
     class Parent : public Drawable, public Focusable
     {
     public:
+        static constexpr size_t CHILDREN_LIMIT = GUART_PARENT_CHILDREN_LIMIT;
+
         virtual ~Parent() = default;
 
         void addWidget(const std::shared_ptr<Widget>&);
@@ -39,13 +46,13 @@ namespace guart
         void setDrawer(Drawer* d) override;
         virtual void setActive(bool active) override; 
 
-        virtual std::string_view getType() const override = 0;
+        virtual etl::string_view getType() const override = 0;
 
         // Focusable
         void setFocusController(FocusController* controller) override;
         inline virtual void focusChangeCallback(bool) override { invalidate(); }
 
     private:
-        std::vector<std::shared_ptr<Widget>> children;
+        etl::vector<std::shared_ptr<Widget>, CHILDREN_LIMIT> children;
     };
 }

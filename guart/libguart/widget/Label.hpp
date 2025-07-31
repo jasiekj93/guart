@@ -6,7 +6,11 @@
  * @date 08-07-2025
  */
 
-#include <string>
+#ifndef GUART_WIDGET_LABEL_LIMIT
+#define GUART_WIDGET_LABEL_LIMIT 32
+#endif
+
+#include <etl/string.h>
 
 #include <libguart/Widget.hpp>
 
@@ -15,14 +19,18 @@ namespace guart::widget
     class Label : public Widget
     {
     public:
-        Label(const Point& position, const std::string_view& text = "");
+        static constexpr size_t LIMIT = GUART_WIDGET_LABEL_LIMIT;
 
-        inline void setText(const std::string_view& t) { text = t; }
+        using Text = etl::string<LIMIT>;
+
+        Label(const Point& position, const etl::string_view& text = "");
+
+        inline void setText(const etl::string_view& t) { text = t; }
         inline auto& getText() const { return text; }
 
-        inline std::string_view getType() const override { return "Label"; }
+        inline etl::string_view getType() const override { return "Label"; }
 
     private:
-        std::string text;
+        Text text;
     };
 } 

@@ -50,7 +50,7 @@ void List::drawWidget(const Drawable& drawable, Canvas& canvas) const
     }
 }
 
-void List::drawItem(const Drawable&, Output& out, std::string_view item, int index) const
+void List::drawItem(const Drawable&, Output& out, etl::string_view item, int index) const
 {
     out << item;
 }

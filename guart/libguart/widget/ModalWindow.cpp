@@ -4,7 +4,7 @@ using namespace guart;
 using namespace guart::widget;
 
 ModalWindow::ModalWindow(const Point& p, const Dimensions& d, 
-    std::string_view message, 
+    etl::string_view message, 
     const ButtonBox::Buttons& buttons)
     : Window(p, d)
 {
@@ -22,13 +22,13 @@ ModalWindow::ModalWindow(const Point& p, const Dimensions& d,
     addWidget(buttonBox);
     addWidget(line);
 
-    buttonBox->onAction = [this](Widget& w, std::string_view action) {
+    buttonBox->onAction = [this](Widget& w, etl::string_view action) {
         if(onAction)
             onAction(*this, action);
     };
 }
 
-void ModalWindow::processKey(const std::string_view& input)
+void ModalWindow::processKey(const etl::string_view& input)
 {
     getChildren()[1]->processKey(input);
 }

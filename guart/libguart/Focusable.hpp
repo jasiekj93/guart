@@ -21,7 +21,7 @@ namespace guart
         virtual inline bool isFocusable() const { return false; }
         virtual inline bool isModal() const { return false; }    
 
-        virtual void processKey(const std::string_view&) {}
+        virtual void processKey(const etl::string_view&) {}
 
         virtual void focusChangeCallback(bool isFocused) = 0;
 

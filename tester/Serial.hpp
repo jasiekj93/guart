@@ -7,9 +7,9 @@
  */
 
 #include <cstdint>
-
-#include <string_view>
 #include <array>
+
+#include <etl/string.h>
 
 #include <libguart/Output.hpp>
 
@@ -19,7 +19,7 @@ public:
     Serial(std::string_view path);
     ~Serial();
 
-    Output& operator<<(const std::string_view) override;
+    Output& operator<<(const etl::string_view) override;
     Output& operator<<(char) override;
 
     void flush() override;

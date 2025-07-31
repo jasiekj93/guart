@@ -4,7 +4,7 @@
 
 using namespace guart;
 
-Widget::Widget(const Point& position, std::string_view label)
+Widget::Widget(const Point& position, etl::string_view label)
     : position(position)
     , label(label)
 {

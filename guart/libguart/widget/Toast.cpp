@@ -4,12 +4,12 @@
 using namespace guart;
 using namespace guart::widget;
 
-Toast::Toast(const Point& position, std::string_view message)
+Toast::Toast(const Point& position, etl::string_view message)
     : Widget(position), message(message)
 {
 }
 
-void Toast::processKey(const std::string_view& input)
+void Toast::processKey(const etl::string_view& input)
 {
     if (input == key::CR or 
         input == key::ESC or

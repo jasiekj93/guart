@@ -6,8 +6,7 @@
  * @date 09-07-2025
  */
 
-#include <string>
-#include <vector>
+#include <etl/string.h>
 
 #include <libguart/widget/List.hpp>
 #include <libguart/Dimensions.hpp>
@@ -19,7 +18,7 @@ namespace guart::widget
     public:
         Slider(const Point&, const Dimensions&, const Items& items = {}, bool addBorder = false);
 
-        inline virtual std::string_view getType() const override { return "Slider"; }
+        inline virtual etl::string_view getType() const override { return "Slider"; }
     
     protected:
         void processActiveIndexChange() override; 

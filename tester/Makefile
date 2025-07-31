@@ -44,6 +44,7 @@ guart \
 #	e.g. if include flag is '-I$(external_dir)/libFoo'
 #	write 'libFoo'
 external_library_include_path = \
+etl/include \
 
 external_library_flags = \
 

@@ -9,7 +9,7 @@ CheckList::CheckList(const Point& p, const Dimensions& d, const Items &items, bo
 {
 }
 
-void CheckList::processKey(const std::string_view &input)
+void CheckList::processKey(const etl::string_view &input)
 {
     if(input.empty())
         return;
