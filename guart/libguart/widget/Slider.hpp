@@ -17,8 +17,6 @@ namespace guart::widget
     class Slider : public List
     {
     public:
-        using Items = std::vector<std::string>;
-
         Slider(const Point&, const Dimensions&, const Items& items = {}, bool addBorder = false);
 
         inline virtual std::string_view getType() const override { return "Slider"; }
