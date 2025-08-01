@@ -13,11 +13,14 @@ void ButtonBox::drawWidget(const Drawable& drawable, Canvas& canvas) const
 {
     auto& buttonBox = static_cast<const guart::widget::ButtonBox&>(drawable);
     auto& out = canvas.getOutput();
+    auto buttonStart = buttonBox.getPosition();
 
     if (buttonBox.hasBorder())
     {
         drawBorder(buttonBox.getPosition(), buttonBox.getDimensions());
         drawBorderTitle(buttonBox.getPosition(), buttonBox.getDimensions(), buttonBox.getTitle());
+
+        buttonStart = Point(buttonBox.getPosition().x + 1, buttonBox.getPosition().y + 1);
     }
 
     auto buttons = buttonBox.getButtons();
@@ -25,7 +28,6 @@ void ButtonBox::drawWidget(const Drawable& drawable, Canvas& canvas) const
     if (buttons.empty())
         return;
 
-    auto buttonStart = Point(buttonBox.getPosition().x + 1, buttonBox.getPosition().y + 1);
     canvas.moveCursor(buttonStart);
 
     for (size_t i = 0; i < buttons.size(); ++i)
