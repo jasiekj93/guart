@@ -103,6 +103,8 @@ bool FocusController::processInput(const std::string_view& input)
         (*oldIt)->focusChangeCallback(false);
         (*focusedWidget)->focusChangeCallback(true);
     }
+    else if (input == key::CTRL_R)
+        refreshOutput();    
     else
         (*focusedWidget)->processKey(input);
 

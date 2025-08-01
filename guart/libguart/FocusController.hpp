@@ -26,6 +26,7 @@ namespace guart
 
     protected:
         virtual void resetOutput() = 0;
+        virtual void refreshOutput() = 0;
 
     private:
         std::list<Focusable*>::iterator focusedWidget = focusableWidgets.end();

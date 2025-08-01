@@ -80,3 +80,8 @@ void Screen::resetOutput()
     output << "\e[H";  // Move cursor to home position
     output.flush();
 }
+
+void Screen::refreshOutput()
+{
+    invalidate();
+}

@@ -38,6 +38,7 @@ namespace guart
     protected:
         //FocusController
         void resetOutput() override;
+        void refreshOutput() override;
 
         //Parent
         inline void processKey(const std::string_view& input) override {}
