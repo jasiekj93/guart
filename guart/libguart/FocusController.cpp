@@ -89,6 +89,20 @@ bool FocusController::processInput(const std::string_view& input)
         (*focusedWidget)->focusChangeCallback(true);
 
     }
+    else if (input == key::SHIFT_TAB)
+    {
+        if((*focusedWidget)->isModal())
+            return true; // Do not change focus if the current widget is modal
+
+        auto oldIt = focusedWidget;
+        if(focusedWidget == focusableWidgets.begin())
+            focusedWidget = std::prev(focusableWidgets.end());
+        else
+            focusedWidget--;
+
+        (*oldIt)->focusChangeCallback(false);
+        (*focusedWidget)->focusChangeCallback(true);
+    }
     else
         (*focusedWidget)->processKey(input);
 
