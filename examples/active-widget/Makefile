@@ -10,10 +10,10 @@ PLATFORM := Pc64
 supported_platforms := Pc32 Pc64 ArmA7-Linux ArmA9-Linux Rpi64
 
 # Target
-target := tester
+target := active-widget
 
 # Directories
-project_dir ?= ..
+project_dir ?= ../..
 make_dir := $(project_dir)/make
 external_dir := $(project_dir)/external
 

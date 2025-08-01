@@ -1,1 +1,5 @@
-https://theasciicode.com.ar/extended-ascii-code/box-drawings-single-vertical-line-character-ascii-code-179.html
+FIX: naprawić pojawiające się modal window np. z przycisku
+LUB
+Zrobić tak, że Screen przyjmuje tylko okna. Okna są FocusControlerami i przełączają widgety, tymczasem między oknami stosuje się ALT+TAB (chyba, że okno jest modalne)
+
+i wyodrębnić drivery do osobnej biblioteki wewnętrznej, z której będą korzystać example
