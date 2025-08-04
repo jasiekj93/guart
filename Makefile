@@ -30,7 +30,7 @@ internal_library_names = \
 
 # Project subprograms
 program_names = \
-examples/active-widget \
+# examples/active-widget \
 
 # Project libraries
 library_names = \

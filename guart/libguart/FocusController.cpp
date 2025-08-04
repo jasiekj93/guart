@@ -12,31 +12,31 @@ void FocusController::addFocusable(Focusable* widget, bool setFocus)
     if(not widget)
         return;
 
-    if(auto it = std::find(focusableWidgets.begin(), focusableWidgets.end(), widget);
-       it == focusableWidgets.end())
+    if(auto it = std::find(focusables.begin(), focusables.end(), widget);
+       it == focusables.end())
     {
         if(widget->isModal())
         {
-            if(focusedWidget == focusableWidgets.begin())
+            if(focused == focusables.begin())
             {
-                focusableWidgets.push_front(widget);
-                focusedWidget = focusableWidgets.begin();
+                focusables.push_front(widget);
+                focused = focusables.begin();
             }
             else
             {
-                focusableWidgets.insert(focusedWidget, widget);
-                focusedWidget--;
+                focusables.insert(focused, widget);
+                focused--;
             }
         }
         else 
         {
             if(setFocus)
             {
-                focusableWidgets.push_front(widget);
-                focusedWidget = focusableWidgets.begin();
+                focusables.push_front(widget);
+                focused = focusables.begin();
             }
             else
-                focusableWidgets.insert(focusedWidget, widget);
+                focusables.insert(focused, widget);
         }
     }
 }
@@ -46,27 +46,27 @@ void FocusController::removeFocusable(Focusable* widget)
     if(widget == nullptr)
         return;
 
-    auto it = std::find(focusableWidgets.begin(), focusableWidgets.end(), widget);
+    auto it = std::find(focusables.begin(), focusables.end(), widget);
 
-    if(it == focusableWidgets.end())
+    if(it == focusables.end())
         return; 
 
-    if(focusedWidget == it)
+    if(focused == it)
     {
-        if(focusableWidgets.size() == 1)
-            focusedWidget = focusableWidgets.end();
-        else if (focusedWidget == std::prev(focusableWidgets.end()))
-            focusedWidget--;
+        if(focusables.size() == 1)
+            focused = focusables.end();
+        else if (focused == std::prev(focusables.end()))
+            focused--;
         else
-            focusedWidget++;
+            focused++;
     } 
 
-    focusableWidgets.erase(it);
+    focusables.erase(it);
 }
 
 bool FocusController::processInput(const std::string_view& input)
 {
-    if (input.empty() or focusableWidgets.empty())
+    if (input.empty() or focusables.empty())
         return true;
 
     if(input == key::CTRL_C or input == key::CTRL_D)
@@ -75,43 +75,48 @@ bool FocusController::processInput(const std::string_view& input)
         return false; // Exit the application
     }
     else if (input == key::TAB)
-    {
-        if((*focusedWidget)->isModal())
-            return true; // Do not change focus if the current widget is modal
-
-        auto oldIt = focusedWidget;
-        focusedWidget++;
-
-        if(focusedWidget == focusableWidgets.end())
-            focusedWidget = focusableWidgets.begin();
-
-        (*oldIt)->focusChangeCallback(false);
-        (*focusedWidget)->focusChangeCallback(true);
-
-    }
+        gotoNextFocusable();
     else if (input == key::SHIFT_TAB)
-    {
-        if((*focusedWidget)->isModal())
-            return true; // Do not change focus if the current widget is modal
-
-        auto oldIt = focusedWidget;
-        if(focusedWidget == focusableWidgets.begin())
-            focusedWidget = std::prev(focusableWidgets.end());
-        else
-            focusedWidget--;
-
-        (*oldIt)->focusChangeCallback(false);
-        (*focusedWidget)->focusChangeCallback(true);
-    }
+        gotoPreviousFocusable();
     else if (input == key::CTRL_R)
         refreshOutput();    
     else
-        (*focusedWidget)->processKey(input);
+        (*focused)->processKey(input);
 
     return true;
 }
 
+void FocusController::gotoNextFocusable()
+{
+    if((*focused)->isModal())
+        return; 
+
+    auto oldIt = focused;
+    focused++;
+
+    if(focused == focusables.end())
+        focused = focusables.begin();
+
+    (*oldIt)->focusChangeCallback(false);
+    (*focused)->focusChangeCallback(true);
+}
+
+void FocusController::gotoPreviousFocusable()
+{
+    if((*focused)->isModal())
+        return; 
+
+    auto oldIt = focused;
+    if(focused == focusables.begin())
+        focused = std::prev(focusables.end());
+    else
+        focused--;
+
+    (*oldIt)->focusChangeCallback(false);
+    (*focused)->focusChangeCallback(true);
+}
+
 bool FocusController::isFocused(const Focusable* w) const
 {
-    return (w == *focusedWidget);
+    return (w == *focused);
 }
