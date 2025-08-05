@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "tester",
+            "name": "modal-window",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/Pc64/debug/tester.elf",
+            "program": "${workspaceFolder}/bin/Pc64/debug/modal-window.elf",
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,

@@ -18,7 +18,7 @@ namespace guart
 {
     class Widget;
 
-    class Parent : public Drawable, public Focusable
+    class Parent : public Drawable, public Focusable, public FocusController
     {
     public:
         virtual ~Parent() = default;
@@ -26,8 +26,6 @@ namespace guart
         void addWidget(const std::shared_ptr<Widget>&);
         void removeWidget(Widget* child);
 
-        inline auto& getChildren() { return children; }
-        inline const auto& getChildren() const { return children; }
 
         virtual void dispose();
         void childFocusedCallback(Widget* child);
@@ -44,6 +42,12 @@ namespace guart
         // Focusable
         void setFocusController(FocusController* controller) override;
         inline virtual void focusChangeCallback(bool) override { invalidate(); }
+        virtual void processKey(const std::string_view&) override;
+        
+
+    protected:
+        inline auto& getChildren() { return children; }
+        inline const auto& getChildren() const { return children; }
 
     private:
         std::vector<std::shared_ptr<Widget>> children;

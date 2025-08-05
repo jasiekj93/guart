@@ -11,7 +11,11 @@ Window::Window(Canvas& canvas)
 void Window::drawWidget(const Drawable& drawable, Canvas& canvas) const
 {
     auto& window = static_cast<const guart::widget::Window&>(drawable);
+    bool dimmerTitle = false;
+
+    if(window.isActive() and not window.isFocused())
+        dimmerTitle = true;
 
     drawBoldBorder(window.getPosition(), window.getDimensions());
-    drawBorderTitle(window.getPosition(), window.getDimensions(), window.getTitle());
+    drawBorderTitle(window.getPosition(), window.getDimensions(), window.getTitle(), dimmerTitle);
 }

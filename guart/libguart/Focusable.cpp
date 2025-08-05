@@ -24,5 +24,5 @@ bool Focusable::isFocused() const
     if(not focusController)
         return false;
     else
-        return focusController->isFocused(this);
+        return focusController->isWidgetFocused(this);
 }

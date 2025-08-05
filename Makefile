@@ -30,7 +30,8 @@ internal_library_names = \
 
 # Project subprograms
 program_names = \
-# examples/active-widget \
+examples/active-widget \
+examples/modal-window \
 
 # Project libraries
 library_names = \

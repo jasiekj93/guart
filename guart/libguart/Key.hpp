@@ -19,6 +19,7 @@ namespace guart::key
     static constexpr auto BACKSPACE = "\x7f";     // Backspace key
     static constexpr auto TAB = "\t";             // Tab key
     static constexpr auto SHIFT_TAB = "\x1b[Z";  // Shift + Tab key
+    static constexpr auto CTRL_TAB = "\x1b[1;5I"; // Ctrl + Tab key
     static constexpr auto SPACE = " ";            // Space key
     static constexpr auto CTRL_C = "\x03";        // Ctrl+C
     static constexpr auto CTRL_D = "\x04";        // Ctrl+D

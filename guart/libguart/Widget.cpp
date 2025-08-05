@@ -29,12 +29,12 @@ void Widget::dispose()
         parent->removeWidget(this);
 }
 
-bool guart::Widget::isFocused() const
+bool Widget::isFocused() const
 {
     if(Parent::isFocused() == true)
         return true;
-    else if(parent)
-        return parent->isFocused();
+    // else if(parent)
+    //     return parent->isFocused();
     else
         return false;
 }

@@ -18,10 +18,12 @@
 
 namespace guart
 {
-    class Screen : public Canvas, public Drawer, public FocusController, public Parent
+    class Screen : public Canvas, public Drawer, public Parent
     {
     public:
         explicit Screen(Output&); 
+
+        bool processInput(const std::string_view&);
 
         //Parent
         void invalidate() const override;
@@ -36,9 +38,8 @@ namespace guart
         void draw(const Drawable&) const override;
 
     protected:
-        //FocusController
-        void resetOutput() override;
-        void refreshOutput() override;
+        void resetOutput();
+        void refreshOutput();
 
         //Parent
         inline void processKey(const std::string_view& input) override {}

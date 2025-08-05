@@ -38,6 +38,26 @@ Screen::Screen(Output& output)
     drawers["Calendar"] = std::make_unique<drawer::Calendar>(*this);
 }
 
+bool Screen::processInput(const std::string_view& input)
+{
+    if (input.empty() or focusables.empty())
+        return true;
+
+    if(input == key::CTRL_C or input == key::CTRL_D)
+    {
+        resetOutput();
+        return false; // Exit the application
+    }
+    else if (input == key::SHIFT_TAB)
+        gotoNextFocusable();
+    else if (input == key::CTRL_R)
+        refreshOutput();    
+    else
+        (*focused)->processKey(input);
+
+    return true;
+}
+
 void Screen::invalidate() const
 {
     clear();

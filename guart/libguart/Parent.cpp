@@ -1,23 +1,21 @@
 #include "Parent.hpp"
 #include "Widget.hpp"
+#include <libguart/Key.hpp>
 
 using namespace guart;
 
-void Parent::addWidget(const std::shared_ptr<Widget>& widget)
+void Parent::addWidget(const std::shared_ptr<Widget>& child)
 {
-    if (not widget)
+    if (not child)
         return;
     
-    widget->setParent(this);
+    child->setParent(this);
 
     if(drawer)
-        widget->setDrawer(drawer);
+        child->setDrawer(drawer);
 
-    if(focusController)
-        widget->setFocusController(focusController);
-
-    children.push_back(widget);
-    
+    child->setFocusController(this);
+    children.push_back(child);
 }
 
 void Parent::removeWidget(Widget* child)
@@ -61,10 +59,10 @@ void Parent::invalidate() const
 {
     Drawable::invalidate();
 
-    for(auto& widget : children)
+    for(auto& child : children)
     {
-        if(widget)
-            widget->invalidate();
+        if(child)
+            child->invalidate();
     }
 }
 
@@ -72,10 +70,10 @@ void Parent::setDrawer(Drawer* d)
 {
     Drawable::setDrawer(d);
 
-    for(auto& widget : children)
+    for(auto& child : children)
     {
-        if(widget)
-            widget->setDrawer(d);
+        if(child)
+            child->setDrawer(d);
     }
 }
 
@@ -102,9 +100,22 @@ void Parent::setFocusController(FocusController* controller)
 {
     Focusable::setFocusController(controller);
 
-    for(auto& widget : children)
-    {
-        if(widget)
-            widget->setFocusController(controller);
-    }
+    // for(auto& widget : children)
+    // {
+    //     if(widget)
+    //         widget->setFocusController(controller);
+    // }
+}
+
+void Parent::processKey(const std::string_view& input)
+{
+    if (input.empty() or focusables.empty())
+        return;
+
+    if (input == key::TAB)
+        gotoNextFocusable();
+    else if (input == key::SHIFT_TAB)
+        gotoPreviousFocusable();
+    else
+        (*focused)->processKey(input);
 }

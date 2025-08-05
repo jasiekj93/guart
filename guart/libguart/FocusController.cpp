@@ -64,28 +64,6 @@ void FocusController::removeFocusable(Focusable* widget)
     focusables.erase(it);
 }
 
-bool FocusController::processInput(const std::string_view& input)
-{
-    if (input.empty() or focusables.empty())
-        return true;
-
-    if(input == key::CTRL_C or input == key::CTRL_D)
-    {
-        resetOutput();
-        return false; // Exit the application
-    }
-    else if (input == key::TAB)
-        gotoNextFocusable();
-    else if (input == key::SHIFT_TAB)
-        gotoPreviousFocusable();
-    else if (input == key::CTRL_R)
-        refreshOutput();    
-    else
-        (*focused)->processKey(input);
-
-    return true;
-}
-
 void FocusController::gotoNextFocusable()
 {
     if((*focused)->isModal())
@@ -116,7 +94,7 @@ void FocusController::gotoPreviousFocusable()
     (*focused)->focusChangeCallback(true);
 }
 
-bool FocusController::isFocused(const Focusable* w) const
+bool FocusController::isWidgetFocused(const Focusable* w) const
 {
     return (w == *focused);
 }

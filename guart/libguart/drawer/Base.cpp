@@ -90,7 +90,7 @@ void Base::drawBoldBorder(const Point& point, const Dimensions& dimensions) cons
     out.flush();
 }
 
-void Base::drawBorderTitle(const Point& p, const Dimensions& d, std::string_view title) const
+void Base::drawBorderTitle(const Point& p, const Dimensions& d, std::string_view title, bool dimmer) const
 {
     if(title.empty())
         return;
@@ -99,7 +99,14 @@ void Base::drawBorderTitle(const Point& p, const Dimensions& d, std::string_view
     auto &out = canvas.getOutput();
 
     canvas.moveCursor({ p.x + titlePosition, p.y });
+
+    if(dimmer)
+        out << style::DIMMER; 
     out << title;
+
+    if(dimmer)
+        out << style::NORMAL; 
+
     out.flush();
 }
 

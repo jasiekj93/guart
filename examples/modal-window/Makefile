@@ -10,7 +10,7 @@ PLATFORM := Pc64
 supported_platforms := Pc32 Pc64 ArmA7-Linux ArmA9-Linux Rpi64
 
 # Target
-target := active-widget
+target := modal-window
 
 # Directories
 project_dir ?= ../..

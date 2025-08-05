@@ -24,6 +24,7 @@ namespace guart::widget
         inline void setTitle(std::string_view l) { title = l; }
         inline std::string_view getTitle() const { return title; }
         inline auto& getDimensions() const { return dimensions; }
+        inline bool isFocusable() const { return true; }
 
     private:
         Dimensions dimensions;

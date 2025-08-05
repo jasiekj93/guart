@@ -20,18 +20,13 @@ namespace guart
 
         void addFocusable(Focusable*, bool setFocus = true);
         void removeFocusable(Focusable* widget);
-        bool isFocused(const Focusable*) const;
+        bool isWidgetFocused(const Focusable*) const;
         
-        virtual bool processInput(const std::string_view&);
 
     protected:
         void gotoNextFocusable();
         void gotoPreviousFocusable();
 
-        virtual void resetOutput() = 0;
-        virtual void refreshOutput() = 0;
-
-    private:
         std::list<Focusable*>::iterator focused = focusables.end();
         std::list<Focusable*> focusables;
     };
