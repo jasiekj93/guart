@@ -56,6 +56,8 @@ namespace guart
     static constexpr auto BLACK_VERTICAL_RECTANGLE = "█";
     static constexpr auto BLACK_UP_POINTING_TRIANGLE = "▲";
     static constexpr auto BLACK_DOWN_POINTING_TRIANGLE = "▼";
+    static constexpr auto BLACK_LEFT_POINTING_TRIANGLE = "◀";
+    static constexpr auto BLACK_RIGHT_POINTING_TRIANGLE = "▶";
     static constexpr auto BLACK_HORIZONTAL_RECTANGLE = "▬";
     static constexpr auto DARK_SHADE = "▓";
 }

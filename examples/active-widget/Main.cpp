@@ -20,7 +20,6 @@ int main(int argc, char* argv[])
     // Serial output("/dev/ttyUSB1");
 
     Screen screen(output);
-    // ButtonObserver buttonObserver(&screen); // Initialize with nullptr, will set later
 
     auto window = std::make_shared<widget::Window>(Point{10, 10}, Dimensions{30, 10});
     window->setLabel("window");

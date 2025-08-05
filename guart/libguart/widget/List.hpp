@@ -29,7 +29,9 @@ namespace guart::widget
         inline auto getDimensions() const { return dimensions; }
         inline auto getActiveIndex() const { return activeIndex; }
         inline auto getDisplayedIndex() const { return displayedIndex; }
+
         inline bool hasBorder() const { return addBorder; }
+        inline void setBorder(bool border) { addBorder = border; }
 
         inline void setTitle(std::string_view l) { title = l; }
         inline std::string_view getTitle() const { return title; }

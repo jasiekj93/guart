@@ -33,6 +33,7 @@ program_names = \
 examples/active-widget \
 examples/modal-window \
 examples/modal-form \
+examples/radiolist \
 
 # Project libraries
 library_names = \
