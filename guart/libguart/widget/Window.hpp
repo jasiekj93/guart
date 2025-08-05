@@ -20,11 +20,11 @@ namespace guart::widget
 
         inline std::string_view getType() const override { return "Window"; }
         inline Point getContentPosition() const override { return getPosition() + Point{1, 0}; }
+        inline bool isFocusable() const override { return true; }
 
         inline void setTitle(std::string_view l) { title = l; }
         inline std::string_view getTitle() const { return title; }
         inline auto& getDimensions() const { return dimensions; }
-        inline bool isFocusable() const { return true; }
 
     private:
         Dimensions dimensions;

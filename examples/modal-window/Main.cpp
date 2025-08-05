@@ -16,8 +16,8 @@ using namespace guart;
 
 void createModal(Screen& screen)
 {
-    auto modalWindow = std::make_shared<widget::ModalWindow>(
-        Point{5, 5}, Dimensions{30, 10}, "This is a modal window\nAlso checking if it works\nwith multiple lines.", 
+    auto modalWindow = std::make_shared<widget::DialogWindow>(
+        Point{30, 20}, Dimensions{30, 5}, "This is a modal window\nAlso checking if it works\nwith multiple lines.", 
         widget::ButtonBox::Buttons{"OK", "Cancel"});
     modalWindow->setTitle("Modal Window");
     modalWindow->setLabel("modalWindow");
@@ -43,12 +43,15 @@ int main(int argc, char* argv[])
 
     auto window = std::make_shared<widget::Window>(Point{10, 10}, Dimensions{30, 10});
     window->setLabel("window");
+    window->setTitle("Buttons");
 
-    widget::ButtonBox::Buttons buttonBoxButtons{ "Button1" };
+    widget::ButtonBox::Buttons buttonBoxButtons{ "Modal" };
+    widget::ButtonBox::Buttons buttonBoxButtons2{ "Nothing" };
+    
     auto buttonBox = std::make_shared<widget::ButtonBox>(Point{0, 2}, Dimensions{20, 1}, buttonBoxButtons);
     buttonBox->setLabel("buttonBox");
 
-    auto buttonBox2 = std::make_shared<widget::ButtonBox>(Point{0, 5}, Dimensions{20, 1}, buttonBoxButtons);
+    auto buttonBox2 = std::make_shared<widget::ButtonBox>(Point{0, 5}, Dimensions{20, 1}, buttonBoxButtons2);
     buttonBox2->setLabel("buttonBox2");
 
     buttonBox->onAction = [&screen](Widget& widget, std::string_view action) {

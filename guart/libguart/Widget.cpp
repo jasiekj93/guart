@@ -31,10 +31,8 @@ void Widget::dispose()
 
 bool Widget::isFocused() const
 {
-    if(Parent::isFocused() == true)
+    if(Focusable::isFocused() == true)
         return true;
-    // else if(parent)
-    //     return parent->isFocused();
     else
         return false;
 }

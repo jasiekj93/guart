@@ -58,7 +58,7 @@ int main(int argc, char* argv[])
         widget::Slider::Items{"0", "20", "40", "60", "80", "100"}, true);
     screen.addWidget(slider);
 
-    // auto modalWindow = std::make_shared<widget::ModalWindow>(
+    // auto modalWindow = std::make_shared<widget::DialogWindow>(
     //     Point{5, 5}, Dimensions{30, 10}, "This is a modal window\nAlso checking if it works\nwith multiple lines.", 
     //     widget::ButtonBox::Buttons{"OK", "Cancel"});
     // modalWindow->setTitle("Modal Window");
