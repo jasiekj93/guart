@@ -14,17 +14,21 @@ void TextField::drawWidget(const Drawable& drawable, Canvas& canvas) const
 {
     auto& textField = static_cast<const widget::TextField&>(drawable);
     auto& out = canvas.getOutput();
+    auto position = textField.getPosition();
+
 
     if(textField.hasBorder())
     {
         drawBorder(textField.getPosition(), 
             Dimensions {(Dimensions::Width)textField.getLength(), 1}); 
+
+        position += Point{1, 1}; 
     }
 
     if(textField.isFocused())
         out << style::REVERSE;
 
-    canvas.moveCursor(textField.getPosition() + Point{1, 1}); 
+    canvas.moveCursor(position);
     out << textField.getText();
 
     if(textField.getText().size() < textField.getLength() and

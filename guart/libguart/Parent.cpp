@@ -99,12 +99,6 @@ void Parent::setActive(bool active)
 void Parent::setFocusController(FocusController* controller)
 {
     Focusable::setFocusController(controller);
-
-    // for(auto& widget : children)
-    // {
-    //     if(widget)
-    //         widget->setFocusController(controller);
-    // }
 }
 
 void Parent::processKey(const std::string_view& input)
@@ -112,9 +106,9 @@ void Parent::processKey(const std::string_view& input)
     if (input.empty() or focusables.empty())
         return;
 
-    if (input == key::TAB)
+    if (input == key::PAGE_DOWN)
         gotoNextFocusable();
-    else if (input == key::SHIFT_TAB)
+    else if (input == key::PAGE_UP)
         gotoPreviousFocusable();
     else
         (*focused)->processKey(input);

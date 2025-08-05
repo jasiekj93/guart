@@ -28,7 +28,8 @@ void TextField::processKey(const std::string_view& input)
         input == key::CR or
         input == key::NEW_LINE) 
     {
-        onAction(*this, text);
+        if(onAction)
+            onAction(*this, text);
     }
     else if(input.size() == 1)
     {

@@ -19,7 +19,7 @@ namespace guart::widget
         void resize(const Dimensions& d); 
 
         inline std::string_view getType() const override { return "Window"; }
-        inline Point getContentPosition() const override { return getPosition() + Point{1, 0}; }
+        inline Point getContentPosition() const override { return getPosition() + Point{1, 1}; }
         inline bool isFocusable() const override { return true; }
 
         inline void setTitle(std::string_view l) { title = l; }

@@ -32,6 +32,7 @@ internal_library_names = \
 program_names = \
 examples/active-widget \
 examples/modal-window \
+examples/modal-form \
 
 # Project libraries
 library_names = \

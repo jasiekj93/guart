@@ -48,8 +48,10 @@ bool Screen::processInput(const std::string_view& input)
         resetOutput();
         return false; // Exit the application
     }
-    else if (input == key::SHIFT_TAB)
+    else if (input == key::TAB)
         gotoNextFocusable();
+    else if (input == key::SHIFT_TAB)
+        gotoPreviousFocusable();
     else if (input == key::CTRL_R)
         refreshOutput();    
     else
