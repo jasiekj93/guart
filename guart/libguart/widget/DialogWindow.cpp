@@ -8,14 +8,14 @@ DialogWindow::DialogWindow(const Point& p, const Dimensions& d,
     const ButtonBox::Buttons& buttons)
     : Window(p, d)
 {
-    auto textBox = std::make_shared<TextBox>(Point{1, 1}, message);
+    auto textBox = std::make_shared<TextBox>(Point{0, 0}, message);
     textBox->setLabel("textBox-modal");
-    auto buttonBox = std::make_shared<ButtonBox>(Point{0, d.height}, 
+    auto buttonBox = std::make_shared<ButtonBox>(Point{0, d.height - 1}, 
         Dimensions{d.width - 2, 1}, 
         buttons,
         false);
     buttonBox->setLabel("buttonBox-modal");
-    auto line = std::make_shared<Line>(Point{0, d.height - 1}, d.width, false);
+    auto line = std::make_shared<Line>(Point{0, d.height - 2}, d.width, false);
     line->setLabel("line-modal");
 
     addWidget(textBox);

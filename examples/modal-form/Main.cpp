@@ -19,11 +19,9 @@ void createModal(Screen& screen)
     static std::shared_ptr<widget::ModalWindow> modalWindow;
 
     modalWindow = std::make_shared<widget::ModalWindow>(
-        Point{30, 20}, Dimensions{31, 20});
+        Point{30, 20}, Dimensions{31, 11});
     modalWindow->setTitle("Form");
     modalWindow->setLabel("modalWindow");
-
-
 
     auto nameLabel = std::make_shared<widget::Label>(Point{1, 0}, "Name:");
     auto surnameLabel = std::make_shared<widget::Label>(Point{1, 2}, "Surname:");
