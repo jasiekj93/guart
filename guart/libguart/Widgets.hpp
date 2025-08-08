@@ -19,5 +19,6 @@
 #include <libguart/widget/Slider.hpp>
 #include <libguart/widget/TextField.hpp>
 #include <libguart/widget/Calendar.hpp>
+#include <libguart/widget/ScatterPlot.hpp>
 
 #include <libguart/Screen.hpp>

@@ -34,6 +34,7 @@ examples/active-widget \
 examples/modal-window \
 examples/modal-form \
 examples/radiolist \
+examples/graph \
 
 # Project libraries
 library_names = \

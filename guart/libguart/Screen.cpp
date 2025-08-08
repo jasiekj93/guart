@@ -14,6 +14,7 @@
 #include <libguart/drawer/Slider.hpp>
 #include <libguart/drawer/TextField.hpp>
 #include <libguart/drawer/Calendar.hpp>
+#include <libguart/drawer/ScatterPlot.hpp>
 #include <libguart/Key.hpp>
 
 using namespace guart;
@@ -36,11 +37,12 @@ Screen::Screen(Output& output)
     drawers["Slider"] = std::make_unique<drawer::Slider>(*this);
     drawers["TextField"] = std::make_unique<drawer::TextField>(*this);
     drawers["Calendar"] = std::make_unique<drawer::Calendar>(*this);
+    drawers["ScatterPlot"] = std::make_unique<drawer::ScatterPlot>(*this);
 }
 
 bool Screen::processInput(const std::string_view& input)
 {
-    if (input.empty() or focusables.empty())
+    if (input.empty()) 
         return true;
 
     if(input == key::CTRL_C or input == key::CTRL_D)
@@ -48,6 +50,8 @@ bool Screen::processInput(const std::string_view& input)
         resetOutput();
         return false; // Exit the application
     }
+    else if(focusables.empty())
+        return true; 
     else if (input == key::TAB)
         gotoNextFocusable();
     else if (input == key::SHIFT_TAB)

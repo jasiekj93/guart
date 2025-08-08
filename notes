@@ -1,6 +1,4 @@
-FIX: naprawić pojawiające się modal window np. z przycisku
-LUB
-Zrobić tak, że Screen przyjmuje tylko okna. Okna są FocusControlerami i przełączają widgety, tymczasem między oknami stosuje się ALT+TAB (chyba, że okno jest modalne)
-a jak okienko nie ma focusablowych widgetów to jest pomijane przy przełączaniu
-
-i wyodrębnić drivery do osobnej biblioteki wewnętrznej, z której będą korzystać example
+    //ScatterPlot
+    //BarGraph
+    //ProgressBar
+    //Table
