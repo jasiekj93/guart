@@ -51,7 +51,11 @@ void ScatterPlot::drawXAxis(const Drawable& drawable, Canvas& canvas, unsigned i
     canvas.moveCursor(bottomLeft + Point{0, 1});
 
     for(auto i = 0; i < (maxX + 1); i++)
-        out << std::to_string(i) << ' ';
+    {
+        out << std::to_string(i);
+        if(i < 10) 
+            out << ' '; 
+    }
 }
 
 void ScatterPlot::drawYAxis(const Drawable& drawable, Canvas& canvas, unsigned int maxY) const
