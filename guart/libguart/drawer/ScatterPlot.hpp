@@ -20,7 +20,10 @@ namespace guart::drawer
 
         void drawXAxis(const Drawable&, Canvas&, unsigned int maxX) const;
         void drawYAxis(const Drawable&, Canvas&, unsigned int maxY) const;
-        void drawPoints(const Drawable&, Canvas&, unsigned int maxY, unsigned int maxX) const;
+        bool drawPoints(const Drawable&, Canvas&, unsigned int maxY, unsigned int maxX) const;
+        void drawXAxisTitle(const Drawable&, Canvas&) const;
+        void drawYAxisTitle(const Drawable&, Canvas&) const;
+        void drawError(const Drawable&, Canvas&) const;
     };
 
 } 

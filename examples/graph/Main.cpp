@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
 
     Screen screen(output);
 
-    auto graph = std::make_shared<widget::ScatterPlot>(Point{30, 6}, Dimensions{20, 10}, true);
+    auto graph = std::make_shared<widget::ScatterPlot>(Point{30, 6}, Dimensions{30, 20}, true);
     graph->setTitle("Sample ScatterPlot");
     graph->setXTitle("X");
     graph->setYTitle("Y");
