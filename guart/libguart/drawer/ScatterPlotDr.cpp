@@ -18,10 +18,10 @@ void ScatterPlot::drawWidget(const Drawable& drawable, Canvas& canvas) const
     drawBorder(graph.getPosition(), graph.getDimensions());
     drawBorderTitle(graph.getPosition(), graph.getDimensions(), graph.getTitle());
 
-    auto maxY = (graph.getDimensions().height - 5) / 2;
+    auto maxY = (graph.getDimensions().height - 5);
     auto maxX = (graph.getDimensions().width - 5) / 2;
     
-    drawXAxis(drawable, canvas, maxX);
+    drawXAxis(drawable, canvas, maxX, maxY);
     drawXAxisTitle(drawable, canvas);
     drawYAxis(drawable, canvas, maxY);
     drawYAxisTitle(drawable, canvas);
@@ -30,7 +30,7 @@ void ScatterPlot::drawWidget(const Drawable& drawable, Canvas& canvas) const
         drawError(drawable, canvas);
 }
 
-void ScatterPlot::drawXAxis(const Drawable& drawable, Canvas& canvas, unsigned int maxX) const
+void ScatterPlot::drawXAxis(const Drawable& drawable, Canvas& canvas, unsigned int maxX, unsigned int maxY) const
 {
     auto& graph = static_cast<const widget::ScatterPlot&>(drawable);
     auto& out = canvas.getOutput();
@@ -39,6 +39,9 @@ void ScatterPlot::drawXAxis(const Drawable& drawable, Canvas& canvas, unsigned i
         graph.getPosition().x + 2,
         graph.getPosition().y + graph.getDimensions().height - 2
     };
+
+    if(maxY > 9)
+        bottomLeft.x += 1; 
 
     canvas.moveCursor(bottomLeft);
     out << border::LOWER_LEFT << border::HORIZONTAL;
@@ -63,19 +66,26 @@ void ScatterPlot::drawYAxis(const Drawable& drawable, Canvas& canvas, unsigned i
     auto& graph = static_cast<const widget::ScatterPlot&>(drawable);
     auto& out = canvas.getOutput();
 
-    canvas.moveCursor(graph.getPosition() + Point{2, 2});
+    auto tipPosition = graph.getPosition() + Point{2, 2};
+
+    if(maxY > 9)
+        tipPosition += Point{1, 0}; // Adjust for larger numbers
+
+    canvas.moveCursor(tipPosition);
     out << BLACK_UP_POINTING_TRIANGLE;
-    canvas.moveCursor(graph.getPosition() + Point{2, 3});
-    out << border::VERTICAL;
+    // canvas.moveCursor(graph.getPosition() + Point{2, 3});
+    // out << border::VERTICAL;
 
     auto verticalBarDistance = (maxY > 9 ? 3U : 2U);
 
     for(auto i = 0U; i < maxY; i++)
     {
-        canvas.moveCursor(graph.getPosition() + Point{1, (i * 2) + 4});
+        canvas.moveCursor(graph.getPosition() + Point{1, i + 3});
+        if((maxY - i) < 10 and (maxY > 9))
+            out << ' '; 
         out << std::to_string(maxY - i) << border::CROSS;
-        canvas.moveCursor(graph.getPosition() + Point{verticalBarDistance, (i * 2) + 5});
-        out << border::VERTICAL;
+        // canvas.moveCursor(graph.getPosition() + Point{verticalBarDistance, (i * 2) + 5});
+        // out << border::VERTICAL;
     }
 }
 
@@ -93,8 +103,8 @@ bool ScatterPlot::drawPoints(const Drawable &drawable, Canvas &canvas, unsigned 
             continue;
         }
 
-        auto x = graph.getPosition().x + 2 + (point.x * 2);
-        auto y = graph.getPosition().y + 4 + ((maxY - point.y) * 2);
+        auto x = graph.getPosition().x + (maxY < 10 ? 2 : 3) + (point.x * 2);
+        auto y = graph.getPosition().y + 3 + ((maxY - point.y));
 
         canvas.moveCursor(Point{x, y});
         out << BLACK_CIRCLE;

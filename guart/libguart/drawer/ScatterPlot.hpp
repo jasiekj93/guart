@@ -18,7 +18,7 @@ namespace guart::drawer
     protected:
         void drawWidget(const Drawable&, Canvas&) const override;
 
-        void drawXAxis(const Drawable&, Canvas&, unsigned int maxX) const;
+        void drawXAxis(const Drawable&, Canvas&, unsigned int maxX, unsigned int maxY) const;
         void drawYAxis(const Drawable&, Canvas&, unsigned int maxY) const;
         bool drawPoints(const Drawable&, Canvas&, unsigned int maxY, unsigned int maxX) const;
         void drawXAxisTitle(const Drawable&, Canvas&) const;
