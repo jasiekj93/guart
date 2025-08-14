@@ -16,6 +16,7 @@
 #include <libguart/drawer/Calendar.hpp>
 #include <libguart/drawer/ScatterPlot.hpp>
 #include <libguart/drawer/BarGraph.hpp>
+#include <libguart/drawer/ProgressBar.hpp>
 #include <libguart/Key.hpp>
 
 using namespace guart;
@@ -40,6 +41,7 @@ Screen::Screen(Output& output)
     drawers["Calendar"] = std::make_unique<drawer::Calendar>(*this);
     drawers["ScatterPlot"] = std::make_unique<drawer::ScatterPlot>(*this);
     drawers["BarGraph"] = std::make_unique<drawer::BarGraph>(*this);
+    drawers["ProgressBar"] = std::make_unique<drawer::ProgressBar>(*this);
 }
 
 bool Screen::processInput(const std::string_view& input)

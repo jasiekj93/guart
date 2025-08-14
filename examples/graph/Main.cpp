@@ -37,6 +37,26 @@ int main(int argc, char* argv[])
 
     screen.addWidget(barGraph);
 
+    auto progressBar = std::make_shared<widget::ProgressBar>(Point{30, 45}, 40, 100, 25);
+    screen.addWidget(progressBar);
+
+    auto label = std::make_shared<widget::Label>(Point{30, 44});
+    label->setText("Progress: " + std::to_string(progressBar->getPercentageValue()) + "%");
+    screen.addWidget(label);
+
+    auto button = std::make_shared<widget::ButtonBox>(Point{30, 48}, Dimensions{40, 3}, widget::ButtonBox::Buttons{"Increase", "Decrease"}, false);
+    button->onAction = [progressBar, label](Widget&, std::string_view action) {
+        if (action == "Decrease")
+            progressBar->decrease(1);
+        else if (action == "Increase")
+            progressBar->increase(1);
+
+        label->setText("Progress: " + std::to_string(progressBar->getPercentageValue()) + "%  ");
+        label->invalidate();
+        progressBar->invalidate();
+    };
+    screen.addWidget(button);
+
     screen.invalidate();
     TerminalInput termInput;
     

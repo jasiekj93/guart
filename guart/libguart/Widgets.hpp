@@ -21,5 +21,6 @@
 #include <libguart/widget/Calendar.hpp>
 #include <libguart/widget/ScatterPlot.hpp>
 #include <libguart/widget/BarGraph.hpp>
+#include <libguart/widget/ProgressBar.hpp>
 
 #include <libguart/Screen.hpp>
