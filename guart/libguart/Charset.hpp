@@ -63,4 +63,6 @@ namespace guart
     static constexpr auto BLACK_CIRCLE = "●";
     static constexpr auto WARNING_SIGN = "⚠";
     static constexpr auto NO_ENTRY_SIGN = "⛔";
+    static constexpr auto FULL_BLOCK = "█";
+    static constexpr auto HALF_LOWER_BLOCK = "▄";
 }

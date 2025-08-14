@@ -73,10 +73,6 @@ void ScatterPlot::drawYAxis(const Drawable& drawable, Canvas& canvas, unsigned i
 
     canvas.moveCursor(tipPosition);
     out << BLACK_UP_POINTING_TRIANGLE;
-    // canvas.moveCursor(graph.getPosition() + Point{2, 3});
-    // out << border::VERTICAL;
-
-    auto verticalBarDistance = (maxY > 9 ? 3U : 2U);
 
     for(auto i = 0U; i < maxY; i++)
     {
@@ -84,8 +80,6 @@ void ScatterPlot::drawYAxis(const Drawable& drawable, Canvas& canvas, unsigned i
         if((maxY - i) < 10 and (maxY > 9))
             out << ' '; 
         out << std::to_string(maxY - i) << border::CROSS;
-        // canvas.moveCursor(graph.getPosition() + Point{verticalBarDistance, (i * 2) + 5});
-        // out << border::VERTICAL;
     }
 }
 

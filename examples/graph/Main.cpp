@@ -28,6 +28,15 @@ int main(int argc, char* argv[])
     graph->setItems({{0, 0}, {1, 1}, {2, 1}, {2, 3}, {3, 3}});
 
     screen.addWidget(graph);
+
+    auto barGraph = std::make_shared<widget::BarGraph>(Point{30, 20}, Dimensions{40, 20}, true);
+    barGraph->setTitle("Sample BarGraph");
+    barGraph->setXTitle("Categories");
+    barGraph->setYTitle("Values");
+    barGraph->setItems({{"Electronics", 55}, {"Home", 120}, {"Books", 75}, {"Clothing", 90}});
+
+    screen.addWidget(barGraph);
+
     screen.invalidate();
     TerminalInput termInput;
     
